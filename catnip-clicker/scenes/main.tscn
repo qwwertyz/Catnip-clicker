@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://ixr7pgo6m2cb"]
+
+[ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://rsbush3fd7rw" path="res://icon.svg" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="3_sugp2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
+
+[sub_resource type="Theme" id="Theme_sugp2"]
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
+radius = 66.8738
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_o5qli")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ClickButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 249.0
+offset_right = 672.0
+offset_bottom = 405.0
+text = "GATHER CATNIP"
+
+[node name="CatnipLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 176.0
+offset_right = 615.0
+offset_bottom = 221.0
+text = "Catnip: 0"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DPSLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 27.0
+offset_right = 170.0
+offset_bottom = 72.0
+theme = SubResource("Theme_sugp2")
+text = "DPS"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ClickpowerLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 68.0
+offset_right = 237.0
+offset_bottom = 113.0
+theme = SubResource("Theme_sugp2")
+text = "Clickpower: 1"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Upgrade1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 220.0
+offset_right = 296.0
+offset_bottom = 296.0
+text = "Upgrade 1 : 100"
+
+[node name="ArmUpgrade" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 103.0
+offset_right = 297.0
+offset_bottom = 187.0
+tooltip_text = "Train your arms so you can gather more catnip at once!"
+text = "upgrade clickpower: 50"
+
+[node name="Timer" type="Timer" parent="Control"]
+autostart = true
+
+[node name="CatnipStack" type="Sprite2D" parent="."]
+position = Vector2(572, 559)
+texture = ExtResource("2_0wfyh")
+
+[node name="KittySpawner" type="Node2D" parent="."]
+position = Vector2(-27, 588)
+scale = Vector2(0.296875, 0.257813)
+
+[node name="Kitty" type="CharacterBody2D" parent="."]
+position = Vector2(-27, 588)
+scale = Vector2(0.296875, 0.257813)
+script = ExtResource("3_sugp2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Kitty"]
+texture = ExtResource("2_0wfyh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kitty"]
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_jyhfs")
+
+[connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
+[connection signal="pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="Control/ArmUpgrade" to="." method="_on_arm_upgrade_pressed"]
+[connection signal="timeout" from="Control/Timer" to="." method="_on_timer_timeout"]
