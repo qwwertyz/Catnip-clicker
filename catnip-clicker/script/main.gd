@@ -11,12 +11,11 @@ extends Node2D
 @onready var sell: Button = $Control/Sell
 @onready var arm_upgrade: Button = $Control/ArmUpgrade
 
-
-
-var catnip = 90
+var catnip = 100
 var clickpower = 1
 var dps = 0
-var lifetime_earnings = 0
+var lifetime_earnings = 99.0
+var money = -50.0
 
 #upgrades
 var mouse_upgrade_cost = 50
@@ -29,16 +28,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	catnip_label.text = "Catnip: " + str(catnip)
-	# button doesn't have text property!!! NEED to fix
-	#if catnip < 1000000:
-		#ultimate_upgrade.text = ""
-	#else:
-		#ultimate_upgrade.text = "ULTIMATE UPGRADE: DRAG YOUR CATNIP STACK AROUND: 1 BILLION CATNIP"
+	if catnip_label:
+		catnip_label.text = "Catnip: " + str(catnip)
+	
 
 
 func _on_click_button_pressed() -> void:
-	catnip += clickpower
+	add_catnip(clickpower)
 
 
 func _on_timer_timeout() -> void:
@@ -47,25 +43,37 @@ func _on_timer_timeout() -> void:
 func add_catnip(amount):
 	catnip += amount
 	lifetime_earnings += amount
+	print(lifetime_earnings)
+	
+	if catnip < 1000000 and catnip:
+		ultimate_upgrade.text = "To be unlocked..."
+	else:
+		ultimate_upgrade.text = "ULTIMATE UPGRADE: DRAG YOUR CATNIP STACK AROUND: 1 BILLION CATNIP"
 	
 
 
-
 func _on_arm_upgrade_pressed() -> void:
-	if catnip > mouse_upgrade_cost:
+	if catnip >= mouse_upgrade_cost:
 		catnip -= mouse_upgrade_cost
-		mouse_upgrade_cost *= 1.1
+		mouse_upgrade_cost *= 1.2
 		clickpower += 1
 		mouse_level += 1
 		clickpower_label.text = "Clickpower: "+str(clickpower)
-		#arm_upgrade.text = "Upgrade arm" + str(roundf(mouse_upgrade_cost))
+		arm_upgrade.text = "Upgrade arm" + str(roundf(mouse_upgrade_cost))
 
 
 func _on_upgrade_1_pressed() -> void:
-	if catnip > upgrade1_cost:
-		catnip -= upgrade1_cost
+	if money >= upgrade1_cost:
+		money -= upgrade1_cost
 		upgrade1_cost *= 1.2
 		dps += 1
 		upgrade1_level += 1
 		dps_label.text = "Dps: "+str(dps)
-		#upgrade_1.text = "Upgrade 1 cost: " + str(roundf(upgrade1_cost))
+		upgrade_1.text = "Upgrade 1 cost: " + str(roundf(upgrade1_cost))
+
+
+func _on_sell_pressed() -> void:
+	if catnip >= clickpower:
+		catnip -= clickpower
+		money += clickpower
+		coin_label.text = "Money: " + str(roundf(money))
