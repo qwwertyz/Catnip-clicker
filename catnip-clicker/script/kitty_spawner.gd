@@ -4,8 +4,17 @@ var tutorial = true
 @export var object_to_spawn: PackedScene
 @onready var label: Label = $Label
 
-func _process(_delta: float) -> void:
+
+func _ready() -> void:
+	Main.lifetime_earnings_changed.connect(on_lifetime_change.bind(Main.lifetime_earnings))
+	Main.lifetime_earnings_changed.connect(on_lifetime_change)#is bind necessary
+	
+func on_lifetime_change(earnings):
+	pass
+	
+func _process(delta: float) -> void:
 	if Main.lifetime_earnings >= certainamt:
+		
 		Main.lifetime_earnings -= certainamt
 		certainamt *= 1.5
 		var instance = object_to_spawn.instantiate()

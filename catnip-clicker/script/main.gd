@@ -4,24 +4,23 @@ extends Node2D
 @onready var dps_label: RichTextLabel = $Control/DPSLabel
 @onready var living_situation: RichTextLabel = $Control/LivingSituation
 @onready var status_label: RichTextLabel = $Control/StatusLabel
-@onready var coin_label: RichTextLabel = $Control/CoinLabel
+@onready var money_label: RichTextLabel = $Control/MoneyLabel
+@onready var pics_label: RichTextLabel = $Control/PicsLabel
 @onready var clickpower_label: RichTextLabel = $Control/ClickpowerLabel
 @onready var upgrade_1: Button = $Control/Upgrade1
 @onready var ultimate_upgrade: Button = $Control/UltimateUpgrade
 @onready var sell: Button = $Control/Sell
 @onready var arm_upgrade: Button = $Control/ArmUpgrade
+@onready var catnip_farm: Button = $Control/CatnipFarm
 
-var catnip = 100
-var clickpower = 1
-var dps = 0
-var lifetime_earnings = 99.0
-var money = -50.0
 
 #upgrades
 var mouse_upgrade_cost = 50
 var mouse_level = 0
 var upgrade1_cost = 100
 var upgrade1_level =0
+var farm_cost = 150
+var farm_level = 0
 
 func _ready() -> void:
 	print_tree_pretty()
@@ -43,7 +42,8 @@ func _on_timer_timeout() -> void:
 func add_catnip(amount):
 	catnip += amount
 	lifetime_earnings += amount
-	print(lifetime_earnings)
+	lifetime_earnings_changed.emit(lifetime_earnings)
+
 	
 	if catnip < 1000000 and catnip:
 		ultimate_upgrade.text = "To be unlocked..."
@@ -73,7 +73,15 @@ func _on_upgrade_1_pressed() -> void:
 
 
 func _on_sell_pressed() -> void:
-	if catnip >= clickpower:
-		catnip -= clickpower
+	if pics >= clickpower:
+		pics -= clickpower
 		money += clickpower
-		coin_label.text = "Money: " + str(roundf(money))
+		pics_label.text = "Pics: " + str(roundf(pics))
+
+
+func _on_catnip_farm_pressed() -> void:
+	if catnip >= farm_cost:
+		catnip -= farm_cost
+		farm_cost *= 1.3
+		dps += 2
+		catnip_farm.text = "Farm cost: " + str(roundf(farm_cost))

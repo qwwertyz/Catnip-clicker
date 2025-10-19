@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c0x4rkhtlr0nf"]
 
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
-[ext_resource type="Texture2D" uid="uid://rsbush3fd7rw" path="res://icon.svg" id="2_r7qoi"]
+[ext_resource type="Texture2D" uid="uid://bp28q7fiyej0j" path="res://images/istockphoto-1385217969-612x612.jpg" id="2_tqbcw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
 radius = 94.6343
@@ -11,10 +11,18 @@ scale = Vector2(1.151, 1)
 script = ExtResource("1_tqbcw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(18.5263, 16.4848)
-scale = Vector2(1.28947, 1.25757)
-texture = ExtResource("2_r7qoi")
+position = Vector2(33.8836, 27)
+scale = Vector2(0.269497, 0.324426)
+texture = ExtResource("2_tqbcw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(20.2105, 27.1515)
 shape = SubResource("CircleShape2D_jyhfs")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -43.4405
+offset_top = -41.0
+offset_right = 113.56
+offset_bottom = 102.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

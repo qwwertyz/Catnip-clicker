@@ -75,14 +75,26 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="CoinLabel" type="RichTextLabel" parent="Control"]
+[node name="MoneyLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 887.0
-offset_top = 81.0
-offset_right = 1104.0
-offset_bottom = 126.0
+offset_left = 885.0
+offset_top = 86.0
+offset_right = 1102.0
+offset_bottom = 131.0
 theme = SubResource("Theme_sugp2")
-text = "Your money: -50"
+text = "Pics: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PicsLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 885.0
+offset_top = 86.0
+offset_right = 1102.0
+offset_bottom = 131.0
+theme = SubResource("Theme_sugp2")
+text = "Pics: 0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -106,6 +118,15 @@ offset_right = 1097.0
 offset_bottom = 336.0
 tooltip_text = "Who wants to click when someone else can do that for you?"
 text = "Hire worker : 100"
+
+[node name="CatnipFarm" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 213.0
+offset_right = 298.0
+offset_bottom = 289.0
+tooltip_text = "produces 2 catnip/s"
+text = "build catnip farm: 150"
 
 [node name="UltimateUpgrade" type="Button" parent="Control"]
 layout_mode = 0
@@ -164,6 +185,7 @@ texture = ExtResource("2_0wfyh")
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="Control/CatnipFarm" to="." method="_on_catnip_farm_pressed"]
 [connection signal="pressed" from="Control/Sell" to="." method="_on_sell_pressed"]
 [connection signal="pressed" from="Control/ArmUpgrade" to="." method="_on_arm_upgrade_pressed"]
 [connection signal="timeout" from="Control/Timer" to="." method="_on_timer_timeout"]
