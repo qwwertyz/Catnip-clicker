@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0x4rkhtlr0nf"]
+
+[ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
+[ext_resource type="Texture2D" uid="uid://rsbush3fd7rw" path="res://icon.svg" id="2_r7qoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
+radius = 66.8738
+
+[node name="Kitty" type="CharacterBody2D"]
+scale = Vector2(0.296875, 0.257813)
+script = ExtResource("1_tqbcw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r7qoi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jyhfs")
