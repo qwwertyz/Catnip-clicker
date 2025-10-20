@@ -8,7 +8,7 @@ radius = 94.6343
 
 [node name="Kitty" type="CharacterBody2D"]
 scale = Vector2(1.151, 1)
-collision_mask = 0
+collision_layer = 2
 script = ExtResource("1_tqbcw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,9 +21,12 @@ position = Vector2(20.2105, 27.1515)
 shape = SubResource("CircleShape2D_jyhfs")
 
 [node name="Button" type="Button" parent="."]
-offset_left = -43.4405
-offset_top = -41.0
-offset_right = 113.56
-offset_bottom = 102.0
+modulate = Color(1, 1, 1, 0)
+offset_left = -47.7845
+offset_top = -44.0
+offset_right = 109.216
+offset_bottom = 99.0
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -24,6 +24,11 @@ GameData="*res://script/game_data.gd"
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[layer_names]
+
+2d_physics/layer_1="base"
+2d_physics/layer_2="kitty no collide"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=10 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
-[ext_resource type="Texture2D" uid="uid://rsbush3fd7rw" path="res://icon.svg" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://du6wrkkju6yd7" path="res://script/game_data.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c0x4rkhtlr0nf" path="res://scenes/kitty.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://images/image (2).png" id="6_tefeu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -19,13 +20,15 @@ script = ExtResource("1_o5qli")
 clickpower_upgrade_cost = 15
 
 [node name="GameData" type="Node2D" parent="."]
+script = ExtResource("2_tbgi4")
+_pics = 55
+_lifetime_earnings = 100
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("2_tbgi4")
 
 [node name="ClickButton" type="Button" parent="Control"]
 layout_mode = 0
@@ -87,17 +90,17 @@ offset_top = 86.0
 offset_right = 1102.0
 offset_bottom = 131.0
 theme = SubResource("Theme_sugp2")
-text = "Pics: 0"
+text = "Money: 0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
 [node name="PicsLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 885.0
-offset_top = 86.0
-offset_right = 1102.0
-offset_bottom = 131.0
+offset_left = 884.0
+offset_top = 112.0
+offset_right = 1101.0
+offset_bottom = 157.0
 theme = SubResource("Theme_sugp2")
 text = "Pics: 0"
 fit_content = true
@@ -154,10 +157,10 @@ autowrap_mode = 1
 [node name="Sell" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 879.0
-offset_top = 141.0
+offset_top = 156.0
 offset_right = 1087.0
-offset_bottom = 235.0
-tooltip_text = "Sell cat pics online for money!"
+offset_bottom = 250.0
+tooltip_text = "Sell cat pics online for money! 1 pic = 1 bucks"
 text = "Sell pic"
 autowrap_mode = 1
 
@@ -198,13 +201,17 @@ text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pi
 
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CatnipStack"]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_jyhfs")
+collision_mask = 2
+script = ExtResource("5_tefeu")
 
 [node name="CatnipStack" type="Sprite2D" parent="CatnipStack"]
-texture = ExtResource("2_0wfyh")
+position = Vector2(-5.99997, -2.49999)
+scale = Vector2(1.09375, 1.03906)
+texture = ExtResource("6_tefeu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CatnipStack"]
+position = Vector2(-4, -2)
+shape = SubResource("RectangleShape2D_jyhfs")
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_pressed"]

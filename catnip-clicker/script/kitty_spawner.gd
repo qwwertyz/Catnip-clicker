@@ -7,15 +7,15 @@ var tutorial = true
 
 func _ready() -> void:
 	pass
-#	Main.lifetime_earnings_changed.connect(on_lifetime_change.bind(Main.lifetime_earnings))
+	GameData.lifetime_changed.connect(on_lifetime_changed)
 #	Main.lifetime_earnings_changed.connect(on_lifetime_change)#is bind necessary
 	
-	
-func _process(_delta: float) -> void:
+func on_lifetime_changed(value):
+	print(value)
 	if GameData.lifetime_earnings >= certainamt:
 		
-		GameData.lifetime_earnings -= certainamt
-		certainamt *= 1.5
+		#GameData.lifetime_earnings -= certainamt
+		certainamt *= 1.75
 		print(str(certainamt) + "is needed for next kitty")
 		var instance = object_to_spawn.instantiate()
 		add_child(instance)
@@ -27,3 +27,5 @@ func _process(_delta: float) -> void:
 			await get_tree().create_timer(5.0).timeout
 			label.visible = false
 			tutorial = false
+
+	
