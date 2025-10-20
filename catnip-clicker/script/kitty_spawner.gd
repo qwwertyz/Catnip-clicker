@@ -15,7 +15,8 @@ func _process(_delta: float) -> void:
 	if GameData.lifetime_earnings >= certainamt:
 		
 		GameData.lifetime_earnings -= certainamt
-		certainamt *= 2
+		certainamt *= 1.5
+		print(str(certainamt) + "is needed for next kitty")
 		var instance = object_to_spawn.instantiate()
 		add_child(instance)
 		instance.position = Vector2(-200,randi_range(2100,2300))

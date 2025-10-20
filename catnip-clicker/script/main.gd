@@ -6,31 +6,25 @@ extends Node2D
 @onready var status_label: RichTextLabel = $Control/StatusLabel
 @onready var money_label: RichTextLabel = $Control/MoneyLabel
 @onready var pics_label: RichTextLabel = $Control/PicsLabel
-@onready var clickpower_label: RichTextLabel = $Control/ClickpowerLabel
 @onready var upgrade_1: Button = $Control/Upgrade1
 @onready var ultimate_upgrade: Button = $Control/UltimateUpgrade
 @onready var sell: Button = $Control/Sell
-@onready var arm_upgrade: Button = $Control/ArmUpgrade
 @onready var catnip_farm: Button = $Control/CatnipFarm
+@onready var clickpower_upgrade: Button = $Control/ClickpowerUpgrade
+@onready var clickpower_amount_label: Label = $Control/ClickpowerUpgrade/ClickpowerAmountLabel
+@onready var clickpower_label: RichTextLabel = $Control/ClickpowerLabel
+@onready var farm_amount_label: Label = $Control/CatnipFarm/FarmAmountLabel
 
 
-#upgrades
-var mouse_upgrade_cost = 50
-var mouse_level = 0
-var upgrade1_cost = 100
-var upgrade1_level =0
-var farm_cost = 150
-var farm_level = 0
+#upgrades, local
+@export var clickpower_upgrade_cost = 50
+var clickpower_amount = 0
+@export var upgrade1_cost = 100
+var upgrade1_amount =0
+@export var farm_cost = 150
+
 #gamedata variables
-var catnip: #saves me typing gamedata
-	get: return GameData.catnip
-	set(value): GameData.catnip = value
-var clickpower:
-	get: return GameData.clickpower
-	set(value): GameData.clickpower = value
-var money:
-	get: return GameData.money
-	set(value): GameData.money = value
+
 
 func _ready() -> void:
 	print_tree_pretty()
@@ -43,18 +37,31 @@ func _ready() -> void:
 	#GameData.dps_changed.connect(on_dps_changed)
 
 
+
+#--------------SIGNALS------------------\
 func on_catnip_changed(new_value):
-	if catnip_label:
-		catnip_label.text = "Catnip: " + str(new_value)
-		
-func _on_click_button_pressed() -> void:
-	GameData.add_catnip(GameData.clickpower)
+	if catnip_label:#if it exists... bypasses the problem
+		catnip_label.text = "Catnip: " + str(roundf(new_value))
+	
+func on_clickpower_changed(new_value):
+	if clickpower_label:
+		clickpower_label.text = "Clickpower: "+str(new_value)
+	
+func on_money_changed(amount):
+	if money_label:
+		money_label.text = "Money: " + str(roundf(amount))
+	
+func on_pics_changed(pics):
+	if pics_label:
+		pics_label.text = "Pics: " + str(roundf(pics))
+	
 
 
+#----------------others------------------
 func _on_timer_timeout() -> void:
 	GameData.add_catnip(GameData.dps)
 
-	if catnip < 1000000 and catnip:
+	if GameData.catnip < 1000000:
 		if is_instance_valid(ultimate_upgrade):
 			ultimate_upgrade.text = "To be unlocked..."
 	else:
@@ -62,42 +69,43 @@ func _on_timer_timeout() -> void:
 	
 
 
-func _on_arm_upgrade_pressed() -> void:
-	if catnip >= mouse_upgrade_cost:
-		catnip -= mouse_upgrade_cost
-		mouse_upgrade_cost *= 1.2
-		clickpower += 1
-		mouse_level += 1
+	
+func _on_click_button_pressed() -> void:
+	GameData.add_catnip(GameData.clickpower)
+
+func _on_clickpower_upgrade_pressed() -> void:
+	if GameData.catnip >= clickpower_upgrade_cost:
+		GameData.catnip -= clickpower_upgrade_cost
+		GameData.clickpower += 1
+		clickpower_amount += 1
+		clickpower_upgrade_cost *= 1.2
 		
-		arm_upgrade.text = "Upgrade arm " + str(roundf(mouse_upgrade_cost))
+		clickpower_upgrade.text = "Upgrade clickpower " + str(roundf(clickpower_upgrade_cost))
+		clickpower_amount_label.text = "Owned: " + str(clickpower_amount)
 		
-func on_clickpower_changed(clickpower):
-	clickpower_label.text = "Clickpower: "+str(clickpower)
 
 func _on_upgrade_1_pressed() -> void:
-	if money >= upgrade1_cost:
-		money -= upgrade1_cost
+	if GameData.money >= upgrade1_cost:
+		GameData.money -= upgrade1_cost
 		upgrade1_cost *= 1.2
 		GameData.dps += 1
-		upgrade1_level += 1
+		upgrade1_amount += 1
 		dps_label.text = "Dps: "+str(GameData.dps)
 		upgrade_1.text = "Upgrade 1 cost: " + str(roundf(upgrade1_cost))
-func on_money_changed(amount):
-	money_label.text = "Money: " + str(roundf(amount))
 
-func _on_sell_pressed() -> void:
-	if GameData.pics >= GameData.clickpower:
-		GameData.pics -= GameData.clickpower
-		money += GameData.clickpower
-		pics_label.text = "Pics: " + str(roundf(GameData.pics))
-		
-func on_pics_changed(pics):
-	pics_label.text = "Pics: " + str(roundf(pics))
+#func _on_sell_pressed() -> void:
+	#if GameData.pics >= GameData.clickpower:
+		#GameData.pics -= GameData.clickpower
+		#money += GameData.clickpower
+		#pics_label.text = "Pics: " + str(roundf(GameData.pics))
+		#
 
-
+#
 func _on_catnip_farm_pressed() -> void:
-	if catnip >= farm_cost:
-		catnip -= farm_cost
-		farm_cost *= 1.3
+	if GameData.catnip >= farm_cost:
+		GameData.catnip -= farm_cost
 		GameData.dps += 2
+		farm_cost *= 1.2
+		GameData.farm_amount += 1
 		catnip_farm.text = "Farm cost: " + str(roundf(farm_cost))
+		farm_amount_label.text = "Owned: " + str(GameData.farm_amount)
