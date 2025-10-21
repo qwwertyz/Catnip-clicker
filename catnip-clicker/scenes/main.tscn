@@ -13,7 +13,7 @@
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_0wfyh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
-size = Vector2(104, 92)
+size = Vector2(140, 117)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o5qli")
@@ -21,8 +21,6 @@ clickpower_upgrade_cost = 15
 
 [node name="GameData" type="Node2D" parent="."]
 script = ExtResource("2_tbgi4")
-_pics = 55
-_lifetime_earnings = 100
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -50,57 +48,56 @@ autowrap_mode = 0
 
 [node name="DPSLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 27.0
-offset_right = 170.0
-offset_bottom = 72.0
+offset_left = 6.0
+offset_top = 55.0
+offset_right = 121.0
+offset_bottom = 100.0
 theme = SubResource("Theme_sugp2")
 text = "DPS"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="LivingSituation" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 887.0
-offset_top = 19.0
-offset_right = 1104.0
-offset_bottom = 64.0
+[node name="UIRight" type="Node2D" parent="Control"]
+position = Vector2(0, 41)
+
+[node name="LivingSituationLabel" type="RichTextLabel" parent="Control/UIRight"]
+offset_left = 885.0
+offset_top = 23.0
+offset_right = 1102.0
+offset_bottom = 68.0
 theme = SubResource("Theme_sugp2")
 text = "Your living situation: bRoKe"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="StatusLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
+[node name="StatusLabel" type="RichTextLabel" parent="Control/UIRight"]
 offset_left = 885.0
-offset_top = 51.0
+offset_top = 53.0
 offset_right = 1102.0
-offset_bottom = 96.0
+offset_bottom = 98.0
 theme = SubResource("Theme_sugp2")
 text = "Your status: homeless"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="MoneyLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
+[node name="MoneyLabel" type="RichTextLabel" parent="Control/UIRight"]
 offset_left = 885.0
-offset_top = 86.0
+offset_top = 83.0
 offset_right = 1102.0
-offset_bottom = 131.0
+offset_bottom = 128.0
 theme = SubResource("Theme_sugp2")
 text = "Money: 0"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="PicsLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 884.0
-offset_top = 112.0
-offset_right = 1101.0
-offset_bottom = 157.0
+[node name="PicsLabel" type="RichTextLabel" parent="Control/UIRight"]
+offset_left = 885.0
+offset_top = 114.0
+offset_right = 1102.0
+offset_bottom = 159.0
 theme = SubResource("Theme_sugp2")
 text = "Pics: 0"
 fit_content = true
@@ -109,10 +106,10 @@ autowrap_mode = 0
 
 [node name="ClickpowerLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 122.0
-offset_top = 68.0
-offset_right = 237.0
-offset_bottom = 113.0
+offset_left = 123.0
+offset_top = 112.0
+offset_right = 238.0
+offset_bottom = 157.0
 theme = SubResource("Theme_sugp2")
 text = "Clickpower: 1"
 scroll_active = false
@@ -121,18 +118,18 @@ autowrap_mode = 0
 [node name="Upgrade1" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 875.0
-offset_top = 260.0
-offset_right = 1097.0
-offset_bottom = 336.0
+offset_top = 288.0
+offset_right = 1102.0
+offset_bottom = 382.0
 tooltip_text = "Who wants to click when someone else can do that for you?"
 text = "Hire worker : 100"
 
 [node name="CatnipFarm" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 69.0
-offset_top = 213.0
+offset_left = 68.0
+offset_top = 238.0
 offset_right = 298.0
-offset_bottom = 289.0
+offset_bottom = 323.0
 tooltip_text = "produces 2 catnip/s"
 text = "build catnip farm: 150"
 
@@ -147,29 +144,29 @@ text = "Owned: 0"
 
 [node name="UltimateUpgrade" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 336.0
-offset_right = 288.0
-offset_bottom = 430.0
+offset_left = 68.0
+offset_top = 337.0
+offset_right = 295.0
+offset_bottom = 431.0
 text = "ULTIMATE UPGRADE: DRAG YOUR CATNIP STACK AROUND: 1 BILLION CATNIP"
 autowrap_mode = 1
 
 [node name="Sell" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 879.0
-offset_top = 156.0
-offset_right = 1087.0
-offset_bottom = 250.0
-tooltip_text = "Sell cat pics online for money! 1 pic = 1 bucks"
+offset_left = 876.0
+offset_top = 183.0
+offset_right = 1103.0
+offset_bottom = 277.0
+tooltip_text = "Sell cat pics online for money! 1 pic = 1 bucks Selling amount based on clickpower"
 text = "Sell pic"
 autowrap_mode = 1
 
 [node name="ClickpowerUpgrade" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 68.0
-offset_top = 103.0
-offset_right = 297.0
-offset_bottom = 187.0
+offset_top = 139.0
+offset_right = 298.0
+offset_bottom = 224.0
 tooltip_text = "Train your arms so you can gather more catnip at once! Increases your clickpower by 1"
 text = "upgrade clickpower: 50"
 
@@ -185,6 +182,12 @@ text = "Owned: 0"
 [node name="Timer" type="Timer" parent="Control"]
 autostart = true
 
+[node name="UpgradesLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 68.0
+text = "UPGRADES GOES HERE"
+
 [node name="KittySpawner" type="Node2D" parent="."]
 scale = Vector2(0.296875, 0.257813)
 script = ExtResource("2_jyhfs")
@@ -199,18 +202,23 @@ offset_bottom = 2503.81
 theme_override_font_sizes/font_size = 95
 text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pictures!"
 
+[node name="Kitty" parent="." instance=ExtResource("4_jyhfs")]
+z_index = 2
+position = Vector2(-104, 562)
+scale = Vector2(0.17, 0.147)
+
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
 collision_mask = 2
 script = ExtResource("5_tefeu")
 
 [node name="CatnipStack" type="Sprite2D" parent="CatnipStack"]
-position = Vector2(-5.99997, -2.49999)
-scale = Vector2(1.09375, 1.03906)
+position = Vector2(-21.789, -13.5918)
+scale = Vector2(1.39449, 1.27759)
 texture = ExtResource("6_tefeu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatnipStack"]
-position = Vector2(-4, -2)
+position = Vector2(-22, -14.5)
 shape = SubResource("RectangleShape2D_jyhfs")
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]

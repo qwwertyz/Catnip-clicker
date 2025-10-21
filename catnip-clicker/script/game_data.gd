@@ -7,8 +7,8 @@ signal clickpower_changed(new_value)
 signal dps_changed(new_value)
 
 @export var _clickpower: int = 1
-@export var _catnip: int = 100
-@export var _money: int = -50
+@export var _catnip: int = 999
+@export var _money: int = 150 #must be initialized to a constant expression or have a type specifier in the variable
 @export var _dps: int = 0
 @export var _pics: int = 0
 @export var _lifetime_earnings: int # do this so catnip = value doesn't trigger loop endlessly
@@ -19,31 +19,29 @@ signal dps_changed(new_value)
 @export var clickpower_amount = 0
 @export var clickpower_dps = 1
 @export var clickpower_upgrade_cost = 50
-var catnip_old_amount = 0
 #---------------------definitons----------------
-var catnip = 0:# get is not really needed unless you need to change the logic while accessing it.
+var catnip :# get is not really needed unless you need to change the logic while accessing it.
 	get:
 		return _catnip
 	set(value):
 		_catnip = value # wait set doesn't automatically change the value??
-		catnip_old_amount = value
 		catnip_changed.emit(value)#set is void. don't return value
 
-var clickpower = 1:
+var clickpower:
 	get:
 		return _clickpower # now you have to use underscore bc the other is just container
 	set(value):#when value is changed
 		_clickpower = value
 		clickpower_changed.emit(value)
 		
-var dps = 0:
+var dps:
 	get:
 		return farm_dps * farm_amount
 	set(value):
 		dps_changed.emit(value)
 
 	
-var lifetime_earnings = 99:
+var lifetime_earnings:
 	get: 
 		return _lifetime_earnings
 	set(value):
@@ -52,13 +50,13 @@ var lifetime_earnings = 99:
 
 
 
-var pics=0:
+var pics:
 	get: return _pics
 	set(value):
 		_pics = value
 		pics_changed.emit(value)
 
-var money = -50:
+var money:
 	get: 
 		return _money
 	set(value):
@@ -70,3 +68,7 @@ var money = -50:
 func add_catnip(amount):
 	catnip += amount 
 	lifetime_earnings += amount
+	
+func _ready() -> void:
+	catnip_changed.emit(catnip)
+	money_changed.emit(money)

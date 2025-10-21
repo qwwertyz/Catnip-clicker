@@ -2,10 +2,6 @@ extends Node2D
 @onready var click_button: Button = $Control/ClickButton
 @onready var catnip_label: RichTextLabel = $"Control/CatnipLabel"
 @onready var dps_label: RichTextLabel = $Control/DPSLabel
-@onready var living_situation: RichTextLabel = $Control/LivingSituation
-@onready var status_label: RichTextLabel = $Control/StatusLabel
-@onready var money_label: RichTextLabel = $Control/MoneyLabel
-@onready var pics_label: RichTextLabel = $Control/PicsLabel
 @onready var upgrade_1: Button = $Control/Upgrade1
 @onready var ultimate_upgrade: Button = $Control/UltimateUpgrade
 @onready var sell: Button = $Control/Sell
@@ -14,6 +10,11 @@ extends Node2D
 @onready var clickpower_amount_label: Label = $Control/ClickpowerUpgrade/ClickpowerAmountLabel
 @onready var clickpower_label: RichTextLabel = $Control/ClickpowerLabel
 @onready var farm_amount_label: Label = $Control/CatnipFarm/FarmAmountLabel
+#UIright
+@onready var living_situation_label: RichTextLabel = $Control/UIRight/LivingSituationLabel
+@onready var status_label: RichTextLabel = $Control/UIRight/StatusLabel
+@onready var money_label: RichTextLabel = $Control/UIRight/MoneyLabel
+@onready var pics_label: RichTextLabel = $Control/UIRight/PicsLabel
 
 
 #upgrades, local
@@ -94,9 +95,9 @@ func _on_upgrade_1_pressed() -> void:
 		upgrade_1.text = "Upgrade 1 cost: " + str(roundf(upgrade1_cost))
 
 func _on_sell_pressed() -> void:
-	if GameData.pics >= 1:
-		GameData.pics -= 1
-		GameData.money += 1
+	if GameData.pics >= GameData.clickpower:
+		GameData.pics -= GameData.clickpower
+		GameData.money += GameData.clickpower
 #
 func _on_catnip_farm_pressed() -> void:
 	if GameData.catnip >= farm_cost:

@@ -1,32 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0x4rkhtlr0nf"]
+[gd_scene load_steps=3 format=3 uid="uid://c0x4rkhtlr0nf"]
 
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
 [ext_resource type="Texture2D" uid="uid://bp28q7fiyej0j" path="res://images/istockphoto-1385217969-612x612.jpg" id="2_tqbcw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
-radius = 94.6343
-
-[node name="Kitty" type="CharacterBody2D"]
+[node name="Kitty" type="Sprite2D"]
 scale = Vector2(1.151, 1)
-collision_layer = 2
+texture = ExtResource("2_tqbcw")
 script = ExtResource("1_tqbcw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(33.8836, 27)
-scale = Vector2(0.269497, 0.324426)
-texture = ExtResource("2_tqbcw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(20.2105, 27.1515)
-shape = SubResource("CircleShape2D_jyhfs")
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(210.252, -19)
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = -47.7845
-offset_top = -44.0
-offset_right = 109.216
-offset_bottom = 99.0
+offset_left = -283.0
+offset_top = -234.0
+offset_right = 303.0
+offset_bottom = 235.0
 theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
 theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
