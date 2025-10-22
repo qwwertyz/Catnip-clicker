@@ -6,7 +6,7 @@ var tutorial = true
 
 @export var base_catnip: float = 300
 @export var cat_multiplier: float = 3.92
-@export var max_cats: int = 15
+@export var max_cats: int = 10
 var current_cats = 0
 
 func catnip_required_for_cat(n: int) -> float:
@@ -26,16 +26,16 @@ func _ready() -> void:
 func on_lifetime_changed(value):
 	
 	if current_cats < max_cats_unlocked():
-		print("spawning cat at lifetime earning of " + str(GameData.lifetime_earnings))
+		print("spawning cat at lifetime earning of " + str(value))
 		var instance = object_to_spawn.instantiate()
 		add_child(instance)
 		instance.position = Vector2(200,randi_range(2100,2300))
 		current_cats += 1
 	
-	if tutorial:
-		label.visible = true
-		await get_tree().create_timer(5.0).timeout
-		label.visible = false
-		tutorial = false
+		if tutorial:
+			label.visible = true
+			await get_tree().create_timer(5.0).timeout
+			label.visible = false
+			tutorial = false
 
 	

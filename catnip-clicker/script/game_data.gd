@@ -11,7 +11,7 @@ signal dps_changed(new_value)
 @export var _money: int = 150 #must be initialized to a constant expression or have a type specifier in the variable
 @export var _dps: int = 0
 @export var _pics: int = 0
-@export var _lifetime_earnings: int # do this so catnip = value doesn't trigger loop endlessly
+@export var _lifetime_earnings: int =300# do this so catnip = value doesn't trigger loop endlessly
 
 @export var farm_amount = 0
 @export var farm_dps = 2

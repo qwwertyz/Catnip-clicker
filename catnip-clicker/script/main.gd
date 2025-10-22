@@ -17,18 +17,8 @@ extends Node2D
 @onready var pics_label: RichTextLabel = $Control/UIRight/PicsLabel
 
 
-#upgrades, local
-@export var clickpower_upgrade_cost = 50
-var clickpower_amount = 0
-@export var upgrade1_cost = 100
-var upgrade1_amount =0
-@export var farm_cost = 150
-
-#gamedata variables
-
-
 func _ready() -> void:
-	print_tree_pretty()
+	#print_tree_pretty()
 
 	GameData.catnip_changed.connect(on_catnip_changed)
 	#GameData.lifetime_changed.connect(on_lifetime_changed)
@@ -86,13 +76,13 @@ func _on_clickpower_upgrade_pressed() -> void:
 		
 
 func _on_upgrade_1_pressed() -> void:
-	if GameData.money >= upgrade1_cost:
-		GameData.money -= upgrade1_cost
-		upgrade1_cost *= 1.2
+	if GameData.money >= GameData.clickpower_upgrade_cost:
+		GameData.money -= GameData.clickpower_upgrade_cost
+		GameData.clickpower_upgrade_cost *= 1.2
 		GameData.dps += 1
-		upgrade1_amount += 1
+		GameData.clickpower_amount += 1
 		dps_label.text = "Dps: "+str(GameData.dps)
-		upgrade_1.text = "Upgrade 1 cost: " + str(roundf(upgrade1_cost))
+		upgrade_1.text = "Upgrade 1 cost: " + str(roundf(GameData.clickpower_upgrade_cost))
 
 func _on_sell_pressed() -> void:
 	if GameData.pics >= GameData.clickpower:
@@ -100,10 +90,10 @@ func _on_sell_pressed() -> void:
 		GameData.money += GameData.clickpower
 #
 func _on_catnip_farm_pressed() -> void:
-	if GameData.catnip >= farm_cost:
-		GameData.catnip -= farm_cost
+	if GameData.catnip >= GameData.farm_upgrade_cost:
+		GameData.catnip -= GameData.farm_upgrade_cost
 		GameData.dps += 2
-		farm_cost *= 1.2
+		GameData.farm_upgrade_cost *= 1.2
 		GameData.farm_amount += 1
-		catnip_farm.text = "Farm cost: " + str(roundf(farm_cost))
+		catnip_farm.text = "Farm cost: " + str(roundf(GameData.farm_upgrade_cost))
 		farm_amount_label.text = "Owned: " + str(GameData.farm_amount)
