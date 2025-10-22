@@ -1,24 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0x4rkhtlr0nf"]
+[gd_scene load_steps=10 format=3 uid="uid://c0x4rkhtlr0nf"]
 
+[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://Free pack/cat 1.6.png" id="1_r7qoi"]
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
-[ext_resource type="Texture2D" uid="uid://bp28q7fiyej0j" path="res://images/istockphoto-1385217969-612x612.jpg" id="2_tqbcw"]
 
-[node name="Kitty" type="Sprite2D"]
-scale = Vector2(1.151, 1)
-texture = ExtResource("2_tqbcw")
+[sub_resource type="AtlasTexture" id="AtlasTexture_26jn4"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(0, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6pbq"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(32, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x15o3"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwgw5"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_010mf"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqa1l"]
+atlas = ExtResource("1_r7qoi")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vuvx8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26jn4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6pbq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x15o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwgw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_010mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqa1l")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Kitty" type="AnimatedSprite2D"]
+scale = Vector2(500, 500)
+sprite_frames = SubResource("SpriteFrames_vuvx8")
+animation = &"Walk"
+autoplay = "Walk"
+frame_progress = 0.883487
 script = ExtResource("1_tqbcw")
-
-[node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(210.252, -19)
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
-offset_left = -283.0
-offset_top = -234.0
-offset_right = 303.0
-offset_bottom = 235.0
-theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -28.0
+offset_right = -11.0
+offset_bottom = -8.0
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

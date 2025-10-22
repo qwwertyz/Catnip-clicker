@@ -4,27 +4,38 @@ var tutorial = true
 @export var object_to_spawn: PackedScene
 @onready var label: Label = $Label
 
+@export var base_catnip: float = 300
+@export var cat_multiplier: float = 3.92
+@export var max_cats: int = 15
+var current_cats = 0
+
+func catnip_required_for_cat(n: int) -> float:
+	# n is 1-based index of cat, first cat around 300, last 1 billion
+	return base_catnip * pow(cat_multiplier, n - 1)
+	
+func max_cats_unlocked() -> int:
+	for n in range(1, max_cats + 1):
+		if GameData.lifetime_earnings < catnip_required_for_cat(n):
+			return n - 1
+	return max_cats
 
 func _ready() -> void:
 	pass
 	GameData.lifetime_changed.connect(on_lifetime_changed)
-#	Main.lifetime_earnings_changed.connect(on_lifetime_change)#is bind necessary
 	
 func on_lifetime_changed(value):
-	if GameData.lifetime_earnings >= certainamt:
-		
-		#GameData.lifetime_earnings -= certainamt
-		certainamt *= 1.75
-		print(str(certainamt) + "is needed for next kitty")
+	
+	if current_cats < max_cats_unlocked():
+		print("spawning cat at lifetime earning of " + str(GameData.lifetime_earnings))
 		var instance = object_to_spawn.instantiate()
 		add_child(instance)
-		instance.position = Vector2(-200,randi_range(2100,2300))
-		instance.scale = Vector2(1,1)
-		
-		if tutorial:
-			label.visible = true
-			await get_tree().create_timer(5.0).timeout
-			label.visible = false
-			tutorial = false
+		instance.position = Vector2(200,randi_range(2100,2300))
+		current_cats += 1
+	
+	if tutorial:
+		label.visible = true
+		await get_tree().create_timer(5.0).timeout
+		label.visible = false
+		tutorial = false
 
 	

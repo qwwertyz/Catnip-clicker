@@ -204,8 +204,8 @@ text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pi
 
 [node name="Kitty" parent="." instance=ExtResource("4_jyhfs")]
 z_index = 2
-position = Vector2(-104, 562)
-scale = Vector2(0.17, 0.147)
+position = Vector2(311, 244)
+scale = Vector2(4.821, 4)
 
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
