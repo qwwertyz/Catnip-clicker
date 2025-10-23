@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://4w84udbjblxy"]
+
+[ext_resource type="PackedScene" uid="uid://bne5lwcpkyelu" path="res://scenes/button.tscn" id="1_c1qa1"]
+[ext_resource type="Texture2D" uid="uid://j6rhk56ro1rj" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/button_var.tres" id="2_wogcj"]
+
+[node name="ClickButton" instance=ExtResource("1_c1qa1")]
+offset_right = 639.0
+offset_bottom = 273.0
+
+[node name="ButtonTexture" parent="." index="0"]
+texture = ExtResource("2_wogcj")

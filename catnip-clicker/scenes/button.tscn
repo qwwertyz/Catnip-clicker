@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://bne5lwcpkyelu"]
+
+[ext_resource type="FontFile" uid="uid://byk1jpxvp4xvk" path="res://assets/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_i7y4x"]
+[ext_resource type="Script" uid="uid://bl23sydmmhy0g" path="res://script/click_button.gd" id="2_1bdt2"]
+[ext_resource type="Shader" uid="uid://d0br5ityxqbme" path="res://shaders/fake_3D.gdshader" id="3_8m7bo"]
+[ext_resource type="Texture2D" uid="uid://bbwwaiuuj3esf" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/Square Buttons 26x19.png" id="4_t81cg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb6dy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85g3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya4ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("3_8m7bo")
+shader_parameter/fov = 1.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.11
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
+atlas = ExtResource("4_t81cg")
+region = Rect2(11, 70, 26, 19)
+
+[node name="ClickButton" type="Button"]
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 409.0
+offset_top = 188.0
+offset_right = 661.0
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.658932, 0.23992, 0.248512, 1)
+theme_override_fonts/font = ExtResource("1_i7y4x")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eb6dy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_85g3d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ya4ey")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_choun")
+text = "GATHER CATNIP"
+script = ExtResource("2_1bdt2")
+
+[node name="ButtonTexture" type="TextureRect" parent="."]
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_choun")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ya4ey")
+expand_mode = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="ButtonTexture" to="." method="_on_button_texture_gui_input"]

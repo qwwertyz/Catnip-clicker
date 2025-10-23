@@ -6,7 +6,7 @@
 <!-- ABOUT -->
 ## About The Project
 
-hello! One day I'll be happy 
+hello! One day I'll be happy when hackatime is finally fixed
 <p align="right">(<a href="#readme-top">top</a>)</p>
 
 

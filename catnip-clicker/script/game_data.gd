@@ -19,6 +19,9 @@ signal dps_changed(new_value)
 @export var clickpower_amount = 0
 @export var clickpower_dps = 1
 @export var clickpower_upgrade_cost = 50
+@export var worker_amount = 0
+@export var worker_dps = 1
+@export var worker_upgrade_cost = 50
 #---------------------definitons----------------
 var catnip :# get is not really needed unless you need to change the logic while accessing it.
 	get:

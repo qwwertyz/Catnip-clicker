@@ -10,7 +10,7 @@ var min_speed = 1
 var max_speed = 2
 var wiggle_amount := 0.1   # max rotation in radians (~5.7 degrees)
 var wiggle_speed := 1.0   # speed of wobble        # set to true when moving
-var random_location = Vector2(1038,559)
+var random_location: Vector2 = Vector2(1038,559)
 var direction
 var distance
 var velocity # velocity only usable in characterbody 2d
@@ -26,10 +26,19 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match state:
 		KittyState.WALKING:
-			play("Walk")
 			rotation = wiggle_amount * sin(Time.get_ticks_msec() / 100.0 * wiggle_speed)
 			direction = random_location - global_position
 			distance = direction.length()#while breaks. try not to use outside of process
+			if direction.x < 0:
+				if direction.y > 0:#remember godot y is switched
+					play("Walk_SW")
+				else:
+					play("Walk_NW")
+			elif direction.x > 0:
+				if direction.y > 0:
+					play("Walk_SE")
+				else:
+					play("Walk_NE")
 			global_position += direction.normalized() * velocity
 			if global_position.distance_to(random_location) < 5.0:
 				state = KittyState.IDLE
@@ -41,7 +50,7 @@ func enter_state():
 		KittyState.IDLE:
 			play("Idle_" + str(randi_range(1,4)))
 			rotation = 0
-			await get_tree().create_timer(randi_range(5,30)).timeout
+			await get_tree().create_timer(randi_range(1,5)).timeout
 			velocity = randi_range(min_speed,max_speed)
 			random_location = Vector2(randf_range(0,600),(randf_range(0,1000)))
 			#print(random_location)

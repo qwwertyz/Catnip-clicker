@@ -1,34 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=12 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://du6wrkkju6yd7" path="res://script/game_data.gd" id="2_tbgi4"]
-[ext_resource type="Script" uid="uid://bl23sydmmhy0g" path="res://script/click_button.gd" id="3_tipki"]
-[ext_resource type="Shader" uid="uid://d0br5ityxqbme" path="res://shaders/fake_3D.gdshader" id="4_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bne5lwcpkyelu" path="res://scenes/button.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://c0x4rkhtlr0nf" path="res://scenes/kitty.tscn" id="4_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://bbwwaiuuj3esf" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/Square Buttons 26x19.png" id="5_85g3d"]
+[ext_resource type="PackedScene" uid="uid://4w84udbjblxy" path="res://scenes/button_variation.tscn" id="5_choun"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://assets/images/image (2).png" id="6_tefeu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb6dy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85g3d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya4ey"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
-shader = ExtResource("4_85g3d")
-shader_parameter/fov = 1.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.11
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
-atlas = ExtResource("5_85g3d")
-region = Rect2(11, 70, 26, 19)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -49,61 +28,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="ClickButton" type="Button" parent="Control"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 423.0
-offset_top = 188.0
-offset_right = 616.0
-offset_bottom = 331.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_eb6dy")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_85g3d")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ya4ey")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_choun")
-text = "GATHER CATNIP"
-script = ExtResource("3_tipki")
-
-[node name="ButtonTexture" type="TextureRect" parent="Control/ClickButton"]
-show_behind_parent = true
-texture_filter = 1
-material = SubResource("ShaderMaterial_choun")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_ya4ey")
-expand_mode = 1
-
-[node name="CatnipLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 500.0
-offset_top = 176.0
-offset_right = 615.0
-offset_bottom = 221.0
-text = "Catnip: 0"
-scroll_active = false
-autowrap_mode = 0
-
-[node name="DPSLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 55.0
-offset_right = 121.0
-offset_bottom = 100.0
-theme = SubResource("Theme_sugp2")
-text = "DPS"
-scroll_active = false
-autowrap_mode = 0
 
 [node name="UIRight" type="Node2D" parent="Control"]
 position = Vector2(0, 41)
@@ -152,6 +76,27 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
+[node name="CatnipLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 176.0
+offset_right = 615.0
+offset_bottom = 221.0
+text = "Catnip: 0"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DPSLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 71.0
+offset_right = 119.0
+offset_bottom = 116.0
+theme = SubResource("Theme_sugp2")
+text = "DPS"
+scroll_active = false
+autowrap_mode = 0
+
 [node name="ClickpowerLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
 offset_left = 123.0
@@ -163,78 +108,126 @@ text = "Clickpower: 1"
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Upgrade1" type="Button" parent="Control"]
+[node name="UpgradesLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 875.0
-offset_top = 288.0
-offset_right = 1102.0
-offset_bottom = 382.0
-tooltip_text = "Who wants to click when someone else can do that for you?"
-text = "Hire worker : 100"
-
-[node name="CatnipFarm" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 68.0
-offset_top = 238.0
-offset_right = 298.0
-offset_bottom = 323.0
-tooltip_text = "produces 2 catnip/s"
-text = "build catnip farm: 150"
-
-[node name="FarmAmountLabel" type="Label" parent="Control/CatnipFarm"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 51.0
-offset_right = 79.0
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 1155.0
 offset_bottom = 74.0
-theme_override_colors/font_color = Color(0.400698, 0.400698, 0.400698, 1)
+text = "UPGRADES GOES HERE"
+
+[node name="ClickButton" parent="Control" instance=ExtResource("3_o6xl0")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 423.0
+offset_top = 225.0
+offset_right = 675.0
+offset_bottom = 368.0
+grow_horizontal = 1
+grow_vertical = 1
+tooltip_text = "Work"
+
+[node name="WorkerUpgrade" parent="Control" instance=ExtResource("5_choun")]
+layout_mode = 1
+offset_left = 856.0
+offset_top = 272.0
+offset_right = 1086.0
+offset_bottom = 357.0
+tooltip_text = "Who wants to click when you can hire people to do that for you? Sells 1 pic / sec"
+text = "HIRE WORKER: 100"
+
+[node name="WorkerAmount" type="Label" parent="Control/WorkerUpgrade"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 58.0
+offset_right = 84.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0.731026, 0.485682, 0.367899, 1)
 text = "Owned: 0"
 
-[node name="UltimateUpgrade" type="Button" parent="Control"]
+[node name="CatnipFarmUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 70.0
+offset_top = 238.0
+offset_right = 300.0
+offset_bottom = 323.0
+grow_horizontal = 1
+grow_vertical = 1
+tooltip_text = "Welcome to the age of agriculture!
+produces 2 catnip/s"
+text = "build catnip farm: 150"
+
+[node name="FarmAmountLabel" type="Label" parent="Control/CatnipFarmUpgrade"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 61.0
+offset_right = 85.0
+offset_bottom = 84.0
+theme_override_colors/font_color = Color(0.731026, 0.485682, 0.367899, 1)
+text = "Owned: 0"
+
+[node name="UltimateUpgrade" parent="Control" instance=ExtResource("5_choun")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 68.0
 offset_top = 337.0
-offset_right = 295.0
-offset_bottom = 431.0
-text = "ULTIMATE UPGRADE: DRAG YOUR CATNIP STACK AROUND: 1 BILLION CATNIP"
-autowrap_mode = 1
+offset_right = 298.0
+offset_bottom = 426.0
+grow_horizontal = 1
+grow_vertical = 1
+tooltip_text = "To be unlocked..."
+text = "ULTIMATE UPGRADE"
 
-[node name="Sell" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 876.0
-offset_top = 183.0
-offset_right = 1103.0
-offset_bottom = 277.0
-tooltip_text = "Sell cat pics online for money! 1 pic = 1 bucks Selling amount based on clickpower"
-text = "Sell pic"
-autowrap_mode = 1
+[node name="SellButton" parent="Control" instance=ExtResource("5_choun")]
+layout_mode = 1
+offset_left = 856.0
+offset_top = 162.0
+offset_right = 1083.0
+offset_bottom = 257.0
+tooltip_text = "Sell your pics for money
+1 pic = 1 buck"
+text = "SELL PICS"
 
-[node name="ClickpowerUpgrade" type="Button" parent="Control"]
+[node name="ClickpowerUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_left = 68.0
 offset_top = 139.0
 offset_right = 298.0
 offset_bottom = 224.0
-tooltip_text = "Train your arms so you can gather more catnip at once! Increases your clickpower by 1"
+grow_horizontal = 1
+grow_vertical = 1
+tooltip_text = "Train your arm so you can gather more catnip at a time!"
 text = "upgrade clickpower: 50"
 
 [node name="ClickpowerAmountLabel" type="Label" parent="Control/ClickpowerUpgrade"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 59.0
-offset_right = 43.0
-offset_bottom = 82.0
+offset_left = 14.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 80.0
 theme_override_colors/font_color = Color(0.400698, 0.400698, 0.400698, 1)
 text = "Owned: 0"
 
 [node name="Timer" type="Timer" parent="Control"]
 autostart = true
-
-[node name="UpgradesLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 68.0
-text = "UPGRADES GOES HERE"
 
 [node name="KittySpawner" type="Node2D" parent="."]
 scale = Vector2(0.296875, 0.257813)
@@ -264,12 +257,11 @@ texture = ExtResource("6_tefeu")
 position = Vector2(-22, -14.5)
 shape = SubResource("RectangleShape2D_jyhfs")
 
-[connection signal="mouse_entered" from="Control/ClickButton" to="Control/ClickButton" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Control/ClickButton" to="Control/ClickButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
-[connection signal="gui_input" from="Control/ClickButton/ButtonTexture" to="Control/ClickButton" method="_on_button_texture_gui_input"]
-[connection signal="pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_pressed"]
-[connection signal="pressed" from="Control/CatnipFarm" to="." method="_on_catnip_farm_pressed"]
-[connection signal="pressed" from="Control/Sell" to="." method="_on_sell_pressed"]
+[connection signal="pressed" from="Control/WorkerUpgrade" to="." method="_on_worker_upgrade_pressed"]
+[connection signal="pressed" from="Control/WorkerUpgrade" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="Control/CatnipFarmUpgrade" to="." method="_on_catnip_farm_upgrade_pressed"]
+[connection signal="pressed" from="Control/UltimateUpgrade" to="." method="_on_ultimate_upgrade_pressed"]
+[connection signal="pressed" from="Control/SellButton" to="." method="_on_sell_button_pressed"]
 [connection signal="pressed" from="Control/ClickpowerUpgrade" to="." method="_on_clickpower_upgrade_pressed"]
 [connection signal="timeout" from="Control/Timer" to="." method="_on_timer_timeout"]
