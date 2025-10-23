@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://c0x4rkhtlr0nf"]
 
-[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://Free pack/cat 1.6.png" id="1_r7qoi"]
+[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://assets/Free pack/cat 1.6.png" id="1_r7qoi"]
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egrb0"]

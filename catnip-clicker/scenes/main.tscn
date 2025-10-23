@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=19 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
@@ -6,22 +6,29 @@
 [ext_resource type="Script" uid="uid://bl23sydmmhy0g" path="res://script/click_button.gd" id="3_tipki"]
 [ext_resource type="Shader" uid="uid://d0br5ityxqbme" path="res://shaders/fake_3D.gdshader" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c0x4rkhtlr0nf" path="res://scenes/kitty.tscn" id="4_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bbwwaiuuj3esf" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/Square Buttons 26x19.png" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
-[ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://images/image (2).png" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://assets/images/image (2).png" id="6_tefeu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb6dy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85g3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ya4ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
 shader = ExtResource("4_85g3d")
 shader_parameter/fov = 1.0
 shader_parameter/cull_back = true
-shader_parameter/y_rot = -44.342
-shader_parameter/x_rot = 26.551
-shader_parameter/inset = 0.0
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.11
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tipki"]
-size = Vector2(9, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
-size = Vector2(170, 104)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
+atlas = ExtResource("5_85g3d")
+region = Rect2(11, 70, 26, 19)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -44,27 +51,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ClickButton" type="Button" parent="Control"]
-self_modulate = Color(1, 1, 1, 0.368627)
 use_parent_material = true
-layout_mode = 0
-offset_left = 479.0
-offset_top = 249.0
-offset_right = 672.0
-offset_bottom = 405.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 423.0
+offset_top = 188.0
+offset_right = 616.0
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eb6dy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_85g3d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ya4ey")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_choun")
 text = "GATHER CATNIP"
 script = ExtResource("3_tipki")
 
 [node name="ButtonTexture" type="TextureRect" parent="Control/ClickButton"]
+show_behind_parent = true
+texture_filter = 1
 material = SubResource("ShaderMaterial_choun")
-layout_mode = 0
-offset_right = 193.0
-offset_bottom = 156.0
-texture = SubResource("PlaceholderTexture2D_tipki")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ya4ey")
 expand_mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/ClickButton"]
-position = Vector2(90, 61)
-shape = SubResource("RectangleShape2D_tipki")
 
 [node name="CatnipLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
@@ -249,6 +267,7 @@ shape = SubResource("RectangleShape2D_jyhfs")
 [connection signal="mouse_entered" from="Control/ClickButton" to="Control/ClickButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Control/ClickButton" to="Control/ClickButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
+[connection signal="gui_input" from="Control/ClickButton/ButtonTexture" to="Control/ClickButton" method="_on_button_texture_gui_input"]
 [connection signal="pressed" from="Control/Upgrade1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="Control/CatnipFarm" to="." method="_on_catnip_farm_pressed"]
 [connection signal="pressed" from="Control/Sell" to="." method="_on_sell_pressed"]

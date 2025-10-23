@@ -44,7 +44,7 @@ func enter_state():
 			await get_tree().create_timer(randi_range(5,30)).timeout
 			velocity = randi_range(min_speed,max_speed)
 			random_location = Vector2(randf_range(0,600),(randf_range(0,1000)))
-			print(random_location)
+			#print(random_location)
 			state = KittyState.WALKING
 			enter_state()
 	
