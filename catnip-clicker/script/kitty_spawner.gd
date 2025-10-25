@@ -20,7 +20,6 @@ func max_cats_unlocked() -> int:
 	return max_cats
 
 func _ready() -> void:
-	pass
 	GameData.lifetime_changed.connect(on_lifetime_changed)
 	
 func on_lifetime_changed(value):

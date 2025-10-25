@@ -10,7 +10,8 @@ extends Node2D
 @onready var click_button: Button = $Control/ClickButton
 @onready var worker_upgrade: Button = $Control/WorkerUpgrade
 @onready var worker_amount: Label = $Control/WorkerUpgrade/WorkerAmount
-
+@onready var pawparazzi_upgrade: Button = $Control/PawparazziUpgrade
+@onready var pawparazzi_amount: Label = $Control/PawparazziUpgrade/PawparazziAmount
 @onready var button_texture: TextureRect = $Control/Upgrade1/ButtonTexture
 @onready var catnip_farm_upgrade: Button = $Control/CatnipFarmUpgrade
 @onready var farm_amount_label: Label = $Control/CatnipFarmUpgrade/FarmAmountLabel
@@ -29,8 +30,6 @@ func _ready() -> void:
 	GameData.money_changed.connect(on_money_changed)
 	GameData.clickpower_changed.connect(on_clickpower_changed)
 	GameData.dps_changed.connect(on_dps_changed)
-
-
 
 #--------------SIGNALS------------------\
 func on_catnip_changed(new_value):
@@ -54,8 +53,14 @@ func on_dps_changed(amount):
 		dps_label.text = "Dps: "+str(GameData.dps)
 
 #----------------others------------------
-func _on_timer_timeout() -> void:
-	GameData.add_catnip(GameData.dps)
+func _on_tick_timeout() -> void:
+	GameData.add_catnip(GameData.dps)#why does this break inside gamedata???
+	if GameData.pawparazzi_amount > 0:
+		GameData.pics += GameData.pawparazzi_amount
+	if GameData.pics > GameData.worker_amount:
+		GameData.pics -= GameData.worker_amount
+		GameData.money += GameData.worker_amount
+	#print("Pawparazzi:", GameData.pawparazzi_amount, "Pics:", GameData.pics, "Money:", GameData.money)
 
 	if GameData.catnip < 1000000:
 		if is_instance_valid(ultimate_upgrade):
@@ -77,6 +82,26 @@ func _on_clickpower_upgrade_pressed() -> void:
 		clickpower_upgrade.text = "Upgrade clickpower " + str(roundf(GameData.clickpower_upgrade_cost))
 		clickpower_amount_label.text = "Owned: " + str(GameData.clickpower_amount)
 		
+func _on_catnip_farm_upgrade_pressed() -> void:
+	if GameData.catnip >= GameData.farm_upgrade_cost:
+		GameData.catnip -= GameData.farm_upgrade_cost
+		GameData.farm_upgrade_cost *= 1.2
+		GameData.farm_amount += 1
+		GameData.dps += 2 # change dps after adding amount
+		catnip_farm_upgrade.text = "Farm cost: " + str(roundf(GameData.farm_upgrade_cost))
+		farm_amount_label.text = "Owned: " + str(GameData.farm_amount)
+
+	
+func _on_ultimate_upgrade_pressed() -> void:
+	pass # Replace with function body.
+
+#----------------right side ----------------#
+func _on_sell_button_pressed() -> void:
+	if GameData.pics >= GameData.clickpower:
+		GameData.pics -= GameData.clickpower
+		GameData.money += GameData.clickpower
+
+
 
 func _on_worker_upgrade_pressed() -> void:
 	if GameData.money >= GameData.worker_upgrade_cost:
@@ -86,23 +111,16 @@ func _on_worker_upgrade_pressed() -> void:
 		
 		worker_upgrade.text = "Hire worker " + str(roundf(GameData.worker_upgrade_cost))
 		worker_amount.text = "Owned: " + str(GameData.worker_amount)
+	
+
+func _on_pawparazzi_upgrade_pressed() -> void:
+	if GameData.money >= GameData.pawparazzi_upgrade_cost:
+		print("Money before:", GameData.money)
+		GameData.money -= GameData.pawparazzi_upgrade_cost
+		print("Money after:", GameData.money)
+
+		GameData.pawparazzi_amount += 1
+		GameData.pawparazzi_upgrade_cost = ceil(GameData.pawparazzi_upgrade_cost * 1.2)
 		
-
-func _on_sell_button_pressed() -> void:
-	if GameData.pics >= GameData.clickpower:
-		GameData.pics -= GameData.clickpower
-		GameData.money += GameData.clickpower
-
-
-func _on_catnip_farm_upgrade_pressed() -> void:
-	if GameData.catnip >= GameData.farm_upgrade_cost:
-		GameData.catnip -= GameData.farm_upgrade_cost
-		GameData.dps += 2
-		GameData.farm_upgrade_cost *= 1.2
-		GameData.farm_amount += 1
-		catnip_farm_upgrade.text = "Farm cost: " + str(roundf(GameData.farm_upgrade_cost))
-		farm_amount_label.text = "Owned: " + str(GameData.farm_amount)
-
-
-func _on_ultimate_upgrade_pressed() -> void:
-	pass # Replace with function body.
+		pawparazzi_upgrade.text = "Hire pawparazzi " + str(roundf(GameData.pawparazzi_upgrade_cost))
+		pawparazzi_amount.text = "Owned: " + str(GameData.pawparazzi_amount)

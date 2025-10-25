@@ -1,17 +1,17 @@
 extends Node
 signal catnip_changed(new_value)
-signal lifetime_changed(new_value)
 signal pics_changed(new_value)
 signal money_changed(new_value)
 signal clickpower_changed(new_value)
 signal dps_changed(new_value)
+signal lifetime_changed(value)
 
 @export var _clickpower: int = 1
-@export var _catnip: int = 999
-@export var _money: int = 150 #must be initialized to a constant expression or have a type specifier in the variable
+@export var _catnip: int = 0
+@export var _money: int = -50 #must be initialized to a constant expression or have a type specifier in the variable
 @export var _dps: int = 0
 @export var _pics: int = 0
-@export var _lifetime_earnings: int =300# do this so catnip = value doesn't trigger loop endlessly
+@export var _lifetime_earnings: int =0# do this so catnip = value doesn't trigger loop endlessly
 
 @export var farm_amount = 0
 @export var farm_dps = 2
@@ -21,7 +21,10 @@ signal dps_changed(new_value)
 @export var clickpower_upgrade_cost = 50
 @export var worker_amount = 0
 @export var worker_dps = 1
-@export var worker_upgrade_cost = 50
+@export var worker_upgrade_cost = 100
+@export var pawparazzi_amount = 0
+@export var pawparazzi_dps = 1
+@export var pawparazzi_upgrade_cost = 70
 #---------------------definitons----------------
 var catnip :# get is not really needed unless you need to change the logic while accessing it.
 	get:
@@ -64,7 +67,7 @@ var money:
 		return _money
 	set(value):
 		_money = value
-		money_changed.emit(money)
+		money_changed.emit(value)
 
 #--------FUNCTIONS---------
 
@@ -75,3 +78,8 @@ func add_catnip(amount):
 func _ready() -> void:
 	catnip_changed.emit(catnip)
 	money_changed.emit(money)
+	
+
+func _on_tick_timeout() -> void:
+	pass
+	
