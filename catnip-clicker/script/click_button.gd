@@ -1,8 +1,8 @@
-
 extends Button
 
 @export var angle_x_max: float = 15.0
 @export var angle_y_max: float = 15.0
+@onready var sfx: AudioStreamPlayer = $SFX
 
 
 var displacement: float = 0.0 
@@ -45,7 +45,7 @@ func follow_mouse(delta: float) -> void:
 func handle_mouse_click(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index != MOUSE_BUTTON_LEFT: return
-	
+	sfx.play()
 	#if event.is_pressed():
 		#following_mouse = true
 	#else:

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Main="*res://script/main.gd"
 GameData="*res://script/game_data.gd"
+BgMusic="*res://scenes/bg_music.tscn"
 
 [display]
 
@@ -28,7 +29,7 @@ mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/paste_clipboard_image/plugin.cfg")
 
 [gui]
 

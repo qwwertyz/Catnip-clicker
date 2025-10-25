@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c722k0qi6q10t"]
+
+[ext_resource type="Texture2D" uid="uid://cvs7or4rleulx" path="res://assets/images/camera-focus-camera-viewfinder-can-use-for-simple-framework-text-quote-or-graphic-design-element-format-png.png" id="1_cvpoc"]
+[ext_resource type="Script" uid="uid://bly3db52qcgiy" path="res://script/camera.gd" id="2_kod1s"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_cvpoc")
+script = ExtResource("2_kod1s")

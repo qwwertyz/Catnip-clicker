@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://4w84udbjblxy"]
+[gd_scene load_steps=5 format=3 uid="uid://4w84udbjblxy"]
 
 [ext_resource type="PackedScene" uid="uid://bne5lwcpkyelu" path="res://scenes/button.tscn" id="1_c1qa1"]
+[ext_resource type="Script" uid="uid://bpxkrsxusrkuy" path="res://script/button_variation.gd" id="2_tob6b"]
 [ext_resource type="Texture2D" uid="uid://j6rhk56ro1rj" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/button_var.tres" id="2_wogcj"]
+[ext_resource type="AudioStream" uid="uid://bn0tk53ee85ip" path="res://assets/music/button_sfx.mp3" id="3_i511l"]
 
 [node name="ClickButton" instance=ExtResource("1_c1qa1")]
 offset_right = 639.0
 offset_bottom = 273.0
+script = ExtResource("2_tob6b")
 
 [node name="ButtonTexture" parent="." index="0"]
 texture = ExtResource("2_wogcj")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="1"]
+stream = ExtResource("3_i511l")
+bus = &"SFX"

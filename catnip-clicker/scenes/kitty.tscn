@@ -1,7 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://c0x4rkhtlr0nf"]
+[gd_scene load_steps=55 format=3 uid="uid://c0x4rkhtlr0nf"]
 
 [ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://assets/Free pack/cat 1.6.png" id="1_r7qoi"]
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
+[ext_resource type="AudioStream" uid="uid://c7lcy1gcp13t" path="res://assets/music/cat-meow-8-fx-306184.mp3" id="3_26jn4"]
+[ext_resource type="PackedScene" uid="uid://c722k0qi6q10t" path="res://scenes/camera.tscn" id="3_q6pbq"]
+[ext_resource type="AudioStream" uid="uid://ds8hqoav0nifw" path="res://assets/music/camera-shutter-95121.mp3" id="4_q6pbq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egrb0"]
 atlas = ExtResource("1_r7qoi")
@@ -401,10 +404,10 @@ animations = [{
 z_index = 1
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_vuvx8")
-animation = &"Walk_NE"
+animation = &"Walk_up"
 autoplay = "Walk_down"
-frame_progress = 0.833283
 script = ExtResource("1_tqbcw")
+object_to_spawn = ExtResource("3_q6pbq")
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -413,9 +416,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.0
+offset_left = -24.0
 offset_top = -28.0
-offset_right = -11.0
-offset_bottom = -8.0
+offset_right = -8.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SFXMeow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_26jn4")
+volume_db = 3.421
+
+[node name="SFXCamera" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_q6pbq")
+volume_db = 2.053
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
