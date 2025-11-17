@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4ic6dv4md541"]
+
+[ext_resource type="Script" uid="uid://md4rxwuuqnof" path="res://script/popup_text.gd" id="1_4m4vl"]
+
+[node name="PopupText" type="Label"]
+text = "+1"
+horizontal_alignment = 1
+script = ExtResource("1_4m4vl")

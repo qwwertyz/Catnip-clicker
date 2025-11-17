@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://coclp8qf2bo8j"]
+
+[ext_resource type="Script" uid="uid://csl4rudaht1hj" path="res://catnip_particles.gd" id="1_wtxlq"]
+
+[node name="CatnipParticles" type="RigidBody2D"]
+script = ExtResource("1_wtxlq")

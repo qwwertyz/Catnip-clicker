@@ -7,7 +7,7 @@ signal dps_changed(new_value)
 signal lifetime_changed(value)
 
 @export var _clickpower: int = 1
-@export var _catnip: int = 0
+@export var _catnip: int = 999
 @export var _money: int = -50 #must be initialized to a constant expression or have a type specifier in the variable
 @export var _dps: int = 0
 @export var _pics: int = 0
@@ -25,6 +25,9 @@ signal lifetime_changed(value)
 @export var pawparazzi_amount = 0
 @export var pawparazzi_dps = 1
 @export var pawparazzi_upgrade_cost = 70
+
+#----------------------------others------------------
+var color_index = 0
 #---------------------definitons----------------
 var catnip :# get is not really needed unless you need to change the logic while accessing it.
 	get:

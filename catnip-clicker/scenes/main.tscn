@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=15 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://4w84udbjblxy" path="res://scenes/button_variation.tscn" id="5_choun"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://assets/images/image (2).png" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://jymkcsx5bqvi" path="res://script/popup_text_spawner.gd" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://coclp8qf2bo8j" path="res://scenes/catnip_particles.tscn" id="10_ya4ey"]
+[ext_resource type="Script" uid="uid://bvk2tjmnddnkb" path="res://script/camera_2d.gd" id="11_ya4ey"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -32,22 +35,11 @@ offset_bottom = 40.0
 [node name="UIRight" type="Node2D" parent="Control"]
 position = Vector2(0, 41)
 
-[node name="LivingSituationLabel" type="RichTextLabel" parent="Control/UIRight"]
-offset_left = 885.0
-offset_top = 23.0
-offset_right = 1102.0
-offset_bottom = 68.0
-theme = SubResource("Theme_sugp2")
-text = "Your living situation: bRoKe"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
 [node name="StatusLabel" type="RichTextLabel" parent="Control/UIRight"]
-offset_left = 885.0
-offset_top = 53.0
-offset_right = 1102.0
-offset_bottom = 98.0
+offset_left = 879.0
+offset_top = 38.0
+offset_right = 1096.0
+offset_bottom = 83.0
 theme = SubResource("Theme_sugp2")
 text = "Your status: homeless"
 fit_content = true
@@ -55,10 +47,10 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="MoneyLabel" type="RichTextLabel" parent="Control/UIRight"]
-offset_left = 885.0
-offset_top = 83.0
-offset_right = 1102.0
-offset_bottom = 128.0
+offset_left = 879.0
+offset_top = 68.0
+offset_right = 1096.0
+offset_bottom = 113.0
 theme = SubResource("Theme_sugp2")
 text = "Money: -50"
 fit_content = true
@@ -66,10 +58,10 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="PicsLabel" type="RichTextLabel" parent="Control/UIRight"]
-offset_left = 885.0
-offset_top = 114.0
-offset_right = 1102.0
-offset_bottom = 159.0
+offset_left = 879.0
+offset_top = 99.0
+offset_right = 1096.0
+offset_bottom = 144.0
 theme = SubResource("Theme_sugp2")
 text = "Pics: 0"
 fit_content = true
@@ -247,20 +239,6 @@ text = "Owned: 0"
 [node name="Tick" type="Timer" parent="Control"]
 autostart = true
 
-[node name="KittySpawner" type="Node2D" parent="."]
-scale = Vector2(0.296875, 0.257813)
-script = ExtResource("2_jyhfs")
-object_to_spawn = ExtResource("4_jyhfs")
-
-[node name="Label" type="Label" parent="KittySpawner"]
-visible = false
-offset_left = 138.105
-offset_top = 2373.81
-offset_right = 3622.11
-offset_bottom = 2503.81
-theme_override_font_sizes/font_size = 95
-text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pictures!"
-
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
 collision_mask = 2
@@ -275,12 +253,37 @@ texture = ExtResource("6_tefeu")
 position = Vector2(-22, -14.5)
 shape = SubResource("RectangleShape2D_jyhfs")
 
+[node name="KittySpawner" type="Node2D" parent="."]
+scale = Vector2(0.296875, 0.257813)
+script = ExtResource("2_jyhfs")
+object_to_spawn = ExtResource("4_jyhfs")
+
+[node name="Label" type="Label" parent="KittySpawner"]
+visible = false
+offset_left = 138.105
+offset_top = 2373.81
+offset_right = 3622.11
+offset_bottom = 2503.81
+theme_override_font_sizes/font_size = 95
+text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pictures!"
+
+[node name="ClickButtonSpawner" type="Node2D" parent="."]
+script = ExtResource("9_choun")
+catnip_particles = ExtResource("10_ya4ey")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(583, 317)
+script = ExtResource("11_ya4ey")
+
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
+[connection signal="pressed" from="Control/ClickButton" to="ClickButtonSpawner" method="_on_click_button_pressed"]
+[connection signal="pressed" from="Control/ClickButton" to="Camera2D" method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/WorkerUpgrade" to="." method="_on_worker_upgrade_pressed"]
 [connection signal="pressed" from="Control/PawparazziUpgrade" to="." method="_on_pawparazzi_upgrade_pressed"]
 [connection signal="pressed" from="Control/CatnipFarmUpgrade" to="." method="_on_catnip_farm_upgrade_pressed"]
 [connection signal="pressed" from="Control/UltimateUpgrade" to="." method="_on_ultimate_upgrade_pressed"]
 [connection signal="pressed" from="Control/SellButton" to="." method="_on_sell_button_pressed"]
 [connection signal="pressed" from="Control/ClickpowerUpgrade" to="." method="_on_clickpower_upgrade_pressed"]
+[connection signal="pressed" from="Control/ClickpowerUpgrade" to="Camera2D" method="_on_clickpower_upgrade_pressed"]
 [connection signal="timeout" from="Control/Tick" to="." method="_on_tick_timeout"]
 [connection signal="timeout" from="Control/Tick" to="GameData" method="_on_tick_timeout"]
