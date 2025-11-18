@@ -1,25 +1,25 @@
 extends Node2D
-@onready var living_situation_label: RichTextLabel = $Control/UIRight/LivingSituationLabel
+@onready var control: Control = $Control
+@onready var ui_right: Node2D = $Control/UIRight
 @onready var status_label: RichTextLabel = $Control/UIRight/StatusLabel
 @onready var money_label: RichTextLabel = $Control/UIRight/MoneyLabel
 @onready var pics_label: RichTextLabel = $Control/UIRight/PicsLabel
 @onready var catnip_label: RichTextLabel = $Control/CatnipLabel
 @onready var dps_label: RichTextLabel = $Control/DPSLabel
 @onready var clickpower_label: RichTextLabel = $Control/ClickpowerLabel
-@onready var upgrades_label: Label = $Control/UpgradesLabel
 @onready var click_button: Button = $Control/ClickButton
 @onready var worker_upgrade: Button = $Control/WorkerUpgrade
 @onready var worker_amount: Label = $Control/WorkerUpgrade/WorkerAmount
 @onready var pawparazzi_upgrade: Button = $Control/PawparazziUpgrade
 @onready var pawparazzi_amount: Label = $Control/PawparazziUpgrade/PawparazziAmount
-@onready var button_texture: TextureRect = $Control/Upgrade1/ButtonTexture
 @onready var catnip_farm_upgrade: Button = $Control/CatnipFarmUpgrade
 @onready var farm_amount_label: Label = $Control/CatnipFarmUpgrade/FarmAmountLabel
 @onready var ultimate_upgrade: Button = $Control/UltimateUpgrade
 @onready var sell_button: Button = $Control/SellButton
 @onready var clickpower_upgrade: Button = $Control/ClickpowerUpgrade
 @onready var clickpower_amount_label: Label = $Control/ClickpowerUpgrade/ClickpowerAmountLabel
-
+@onready var tick: Timer = $Control/Tick
+@onready var upgrade_1: Button = $Control/Upgrade1
 
 
 func _ready() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=18 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
@@ -9,8 +9,11 @@
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://assets/images/image (2).png" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://jymkcsx5bqvi" path="res://script/popup_text_spawner.gd" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://c4ic6dv4md541" path="res://scenes/popup_text.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://coclp8qf2bo8j" path="res://scenes/catnip_particles.tscn" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://bvk2tjmnddnkb" path="res://script/camera_2d.gd" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://dxc4iqsinej05" path="res://script/shop_elements.gd" id="13_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://assets/images/shop door.png" id="14_jkv2x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -99,14 +102,6 @@ theme = SubResource("Theme_sugp2")
 text = "Clickpower: 1"
 scroll_active = false
 autowrap_mode = 0
-
-[node name="UpgradesLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 6.0
-offset_right = 1155.0
-offset_bottom = 74.0
-text = "UPGRADES GOES HERE"
 
 [node name="ClickButton" parent="Control" instance=ExtResource("3_o6xl0")]
 layout_mode = 0
@@ -239,6 +234,14 @@ text = "Owned: 0"
 [node name="Tick" type="Timer" parent="Control"]
 autostart = true
 
+[node name="OpenShop" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 1140.0
+offset_bottom = 52.0
+text = "⬇️⬇️⬇️open shop⬇️⬇️⬇️"
+
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
 collision_mask = 2
@@ -269,11 +272,47 @@ text = "a Kadse is attracted by your catnip reserve! Quick! Tap on it to take pi
 
 [node name="ClickButtonSpawner" type="Node2D" parent="."]
 script = ExtResource("9_choun")
-catnip_particles = ExtResource("10_ya4ey")
+popup = ExtResource("10_eb6dy")
+
+[node name="CatnipParticles" parent="ClickButtonSpawner" instance=ExtResource("10_ya4ey")]
+position = Vector2(549, 245)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(583, 317)
 script = ExtResource("11_ya4ey")
+
+[node name="ShopElements" type="Node2D" parent="."]
+visible = false
+script = ExtResource("13_a8y0u")
+
+[node name="shopdoor" type="Sprite2D" parent="ShopElements"]
+position = Vector2(582.5, 289.25)
+scale = Vector2(2.27044, 2.12547)
+texture = ExtResource("14_jkv2x")
+
+[node name="Label" type="Label" parent="ShopElements/shopdoor"]
+offset_left = -88.7493
+offset_top = -116.798
+offset_right = 150.251
+offset_bottom = -47.7978
+theme_override_colors/font_color = Color(0.81435, 0.356159, 0.397699, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Holy kitty shop
+get all you need here!"
+
+[node name="Button" type="Button" parent="ShopElements"]
+offset_left = 139.0
+offset_top = 148.0
+offset_right = 347.0
+offset_bottom = 223.0
+text = "Catnip farm"
+
+[node name="CloseShop" type="Button" parent="ShopElements"]
+offset_left = 19.0
+offset_top = 536.0
+offset_right = 1142.0
+offset_bottom = 587.0
+text = "⬆️⬆️⬆️close shop⬆️⬆️⬆️"
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/ClickButton" to="ClickButtonSpawner" method="_on_click_button_pressed"]
@@ -287,3 +326,5 @@ script = ExtResource("11_ya4ey")
 [connection signal="pressed" from="Control/ClickpowerUpgrade" to="Camera2D" method="_on_clickpower_upgrade_pressed"]
 [connection signal="timeout" from="Control/Tick" to="." method="_on_tick_timeout"]
 [connection signal="timeout" from="Control/Tick" to="GameData" method="_on_tick_timeout"]
+[connection signal="pressed" from="Control/OpenShop" to="ShopElements" method="_on_open_shop_pressed"]
+[connection signal="pressed" from="ShopElements/CloseShop" to="ShopElements" method="_on_close_shop_pressed"]
