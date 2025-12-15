@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://crjq2fotn6q3a"]
+
+[ext_resource type="AudioStream" uid="uid://b1wydehubrcht" path="res://assets/music/good-night-lofi-cozy-chill-music-160166.mp3" id="1_f6gl3"]
+
+[node name="Good-night-lofi-cozy-chill-music-160166" type="AudioStreamPlayer"]
+stream = ExtResource("1_f6gl3")
+autoplay = true
+bus = &"Music"

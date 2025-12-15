@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://j6rhk56ro1rj"]
+
+[ext_resource type="Texture2D" uid="uid://dtrrw3lhb2cps" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="1_4v3wt"]
+
+[resource]
+atlas = ExtResource("1_4v3wt")
+region = Rect2(99, 4, 90, 25)
