@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+../escape-room/
+../escape-room-2/
