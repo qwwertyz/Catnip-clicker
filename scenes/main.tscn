@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://c0x4rkhtlr0nf" path="res://scenes/kitty.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://4w84udbjblxy" path="res://scenes/button_variation.tscn" id="5_choun"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
-[ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://assets/images/image (2).png" id="6_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://image/image (2).png" id="6_tefeu"]
 [ext_resource type="Script" uid="uid://jymkcsx5bqvi" path="res://script/popup_text_spawner.gd" id="9_choun"]
 [ext_resource type="PackedScene" uid="uid://c4ic6dv4md541" path="res://scenes/popup_text.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://coclp8qf2bo8j" path="res://scenes/catnip_particles.tscn" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://bvk2tjmnddnkb" path="res://script/camera_2d.gd" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://dxc4iqsinej05" path="res://script/shop_elements.gd" id="13_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://assets/images/shop door.png" id="14_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://image/shop door.png" id="14_jkv2x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 

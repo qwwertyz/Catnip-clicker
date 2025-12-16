@@ -75,8 +75,8 @@ func _on_button_pressed() -> void:
 	instance.global_position = global_position + Vector2(offset_factor,offset_factor)
 	instance.scale = Vector2(scale_factor,scale_factor)
 
-	
-	
+
+
 	#
 #func _on_hitbox_area_entered(area: Area2D) -> void:
 	#consume_amount= minf(2* GameData.dps, min_consume_amount) 
