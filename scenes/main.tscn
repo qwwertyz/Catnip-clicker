@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=20 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://ccwr6tt44qnso" path="res://image/grass.png" id="2_jbj1t"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
 [ext_resource type="Script" uid="uid://du6wrkkju6yd7" path="res://script/game_data.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bne5lwcpkyelu" path="res://scenes/button.tscn" id="3_o6xl0"]
@@ -14,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bvk2tjmnddnkb" path="res://script/camera_2d.gd" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://dxc4iqsinej05" path="res://script/shop_elements.gd" id="13_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://image/shop door.png" id="14_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://b15hlxe3htptp" path="res://image/homeless.png" id="16_muem4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
@@ -25,6 +27,11 @@ size = Vector2(140, 117)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o5qli")
+
+[node name="Grass" type="Sprite2D" parent="."]
+position = Vector2(561, 379)
+scale = Vector2(1.67778, 1.30278)
+texture = ExtResource("2_jbj1t")
 
 [node name="GameData" type="Node2D" parent="."]
 script = ExtResource("2_tbgi4")
@@ -313,6 +320,16 @@ offset_top = 536.0
 offset_right = 1142.0
 offset_bottom = 587.0
 text = "⬆️⬆️⬆️close shop⬆️⬆️⬆️"
+
+[node name="Homeless" type="Sprite2D" parent="."]
+position = Vector2(126, 554)
+scale = Vector2(0.0748184, 0.0748184)
+texture = ExtResource("16_muem4")
+
+[node name="Kitty" parent="." instance=ExtResource("4_jyhfs")]
+position = Vector2(201.5, 203)
+scale = Vector2(5.21875, 5.8125)
+autoplay = "Drag"
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/ClickButton" to="ClickButtonSpawner" method="_on_click_button_pressed"]

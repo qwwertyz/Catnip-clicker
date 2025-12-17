@@ -1,10 +1,17 @@
-[gd_scene load_steps=55 format=3 uid="uid://c0x4rkhtlr0nf"]
+[gd_scene load_steps=59 format=3 uid="uid://c0x4rkhtlr0nf"]
 
-[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://assets/Free pack/cat 1.6.png" id="1_r7qoi"]
+[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://assets/Free pack/cat 1.6.png" id="1_lwgw5"]
+[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://Free pack/cat 1.6.png" id="1_r7qoi"]
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
 [ext_resource type="AudioStream" uid="uid://c7lcy1gcp13t" path="res://assets/music/cat-meow-8-fx-306184.mp3" id="3_26jn4"]
 [ext_resource type="PackedScene" uid="uid://c722k0qi6q10t" path="res://scenes/camera.tscn" id="3_q6pbq"]
 [ext_resource type="AudioStream" uid="uid://ds8hqoav0nifw" path="res://assets/music/camera-shutter-95121.mp3" id="4_q6pbq"]
+[ext_resource type="Script" uid="uid://cdm0ed3kj5xwy" path="res://script/state_machine.gd" id="7_010mf"]
+[ext_resource type="Script" uid="uid://d2uejn0wklxue" path="res://script/kitty_idle.gd" id="8_010mf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d0jb"]
+atlas = ExtResource("1_lwgw5")
+region = Rect2(0, 1376, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egrb0"]
 atlas = ExtResource("1_r7qoi")
@@ -200,6 +207,14 @@ region = Rect2(96, 160, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vuvx8"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3d0jb")
+}],
+"loop": true,
+"name": &"Drag",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_egrb0")
@@ -400,11 +415,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Kitty" type="AnimatedSprite2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Kitty" type="AnimatedSprite2D" parent="."]
 z_index = 1
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_vuvx8")
-animation = &"Walk_up"
+animation = &"Drag"
 autoplay = "Walk_down"
 script = ExtResource("1_tqbcw")
 object_to_spawn = ExtResource("3_q6pbq")
@@ -416,10 +433,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -28.0
-offset_right = -8.0
-offset_bottom = -7.0
+offset_left = -80.0
+offset_top = -120.0
+offset_right = -64.0
+offset_bottom = -99.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -431,4 +448,13 @@ volume_db = 3.421
 stream = ExtResource("4_q6pbq")
 volume_db = 2.053
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="State" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_010mf")
+initial_state = NodePath("KittyIdle")
+
+[node name="KittyIdle" type="Node" parent="State" node_paths=PackedStringArray("kitty")]
+script = ExtResource("8_010mf")
+kitty = NodePath("../..")
+metadata/_custom_type_script = "uid://d2uejn0wklxue"
+
+[connection signal="pressed" from="Button" to="Kitty" method="_on_button_pressed"]
