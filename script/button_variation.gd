@@ -20,7 +20,7 @@ var last_pos: Vector2
 var velocity: Vector2
 
 @onready var button_texture: TextureRect = $ButtonTexture
-@onready var shadow = $Shadow
+
 
 func _ready() -> void:
 	button_texture.material = button_texture.material.duplicate()

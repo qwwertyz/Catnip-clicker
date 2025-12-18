@@ -10,9 +10,9 @@ Color.PURPLE]
 var transparency = 1.0
 
 func _ready() -> void:
-	text = "+ " + str(GameData.clickpower)
-	modulate = colors[GameData.color_index]
-	GameData.color_index = (GameData.color_index + 1) % colors.size()
+	text = "+ " + str(Globals.clickpower)
+	modulate = colors[Globals.color_index]
+	Globals.color_index = (Globals.color_index + 1) % colors.size()
 	
 	
 func _process(delta: float) -> void:

@@ -20,16 +20,17 @@ extends Node2D
 @onready var clickpower_amount_label: Label = $Control/ClickpowerUpgrade/ClickpowerAmountLabel
 @onready var tick: Timer = $Control/Tick
 @onready var upgrade_1: Button = $Control/Upgrade1
+@onready var house: Sprite2D = $House
 
 
 func _ready() -> void:
 	#print_tree_pretty()
 
-	GameData.catnip_changed.connect(on_catnip_changed)
-	GameData.pics_changed.connect(on_pics_changed)
-	GameData.money_changed.connect(on_money_changed)
-	GameData.clickpower_changed.connect(on_clickpower_changed)
-	GameData.dps_changed.connect(on_dps_changed)
+	Globals.catnip_changed.connect(on_catnip_changed)
+	Globals.pics_changed.connect(on_pics_changed)
+	Globals.money_changed.connect(on_money_changed)
+	Globals.clickpower_changed.connect(on_clickpower_changed)
+	Globals.dps_changed.connect(on_dps_changed)
 
 #--------------SIGNALS------------------\
 func on_catnip_changed(new_value):
@@ -50,19 +51,20 @@ func on_pics_changed(pics):
 	
 func on_dps_changed(amount):
 	if dps_label:
-		dps_label.text = "Dps: "+str(GameData.dps)
+		dps_label.text = "Dps: "+str(Globals.dps)
 
 #----------------others------------------
 func _on_tick_timeout() -> void:
-	GameData.add_catnip(GameData.dps)#why does this break inside gamedata???
-	if GameData.pawparazzi_amount > 0:
-		GameData.pics += GameData.pawparazzi_amount
-	if GameData.pics > GameData.worker_amount:
-		GameData.pics -= GameData.worker_amount
-		GameData.money += GameData.worker_amount
-	#print("Pawparazzi:", GameData.pawparazzi_amount, "Pics:", GameData.pics, "Money:", GameData.money)
+	
+	Globals.add_catnip(Globals.dps)#why does this break inside Globals???
+	if Globals.pawparazzi_amount > 0:
+		Globals.pics += Globals.pawparazzi_amount
+	if Globals.pics > Globals.worker_amount:
+		Globals.pics -= Globals.worker_amount
+		Globals.money += Globals.worker_amount
+	#print("Pawparazzi:", Globals.pawparazzi_amount, "Pics:", Globals.pics, "Money:", Globals.money)
 
-	if GameData.catnip < 1000000:
+	if Globals.catnip < 1000000:
 		if is_instance_valid(ultimate_upgrade):
 			ultimate_upgrade.text = "To be unlocked..."
 	else:
@@ -70,26 +72,26 @@ func _on_tick_timeout() -> void:
 	
 
 func _on_click_button_pressed() -> void:
-	GameData.add_catnip(GameData.clickpower)
+	Globals.add_catnip(Globals.clickpower)
 
 func _on_clickpower_upgrade_pressed() -> void:
-	if GameData.catnip >= GameData.clickpower_upgrade_cost:
-		GameData.catnip -= GameData.clickpower_upgrade_cost
-		GameData.clickpower += 1
-		GameData.clickpower_amount += 1
-		GameData.clickpower_upgrade_cost *= 1.2
+	if Globals.catnip >= Globals.clickpower_upgrade_cost:
+		Globals.catnip -= Globals.clickpower_upgrade_cost
+		Globals.clickpower += 1
+		Globals.clickpower_amount += 1
+		Globals.clickpower_upgrade_cost *= 1.2
 		
-		clickpower_upgrade.text = "Upgrade clickpower " + str(roundf(GameData.clickpower_upgrade_cost))
-		clickpower_amount_label.text = "Owned: " + str(GameData.clickpower_amount)
+		clickpower_upgrade.text = "Upgrade clickpower " + str(roundf(Globals.clickpower_upgrade_cost))
+		clickpower_amount_label.text = "Owned: " + str(Globals.clickpower_amount)
 		
 func _on_catnip_farm_upgrade_pressed() -> void:
-	if GameData.catnip >= GameData.farm_upgrade_cost:
-		GameData.catnip -= GameData.farm_upgrade_cost
-		GameData.farm_upgrade_cost *= 1.2
-		GameData.farm_amount += 1
-		GameData.dps += 2 # change dps after adding amount
-		catnip_farm_upgrade.text = "Farm cost: " + str(roundf(GameData.farm_upgrade_cost))
-		farm_amount_label.text = "Owned: " + str(GameData.farm_amount)
+	if Globals.catnip >= Globals.farm_upgrade_cost:
+		Globals.catnip -= Globals.farm_upgrade_cost
+		Globals.farm_upgrade_cost *= 1.2
+		Globals.farm_amount += 1
+		Globals.dps += 2 # change dps after adding amount
+		catnip_farm_upgrade.text = "Farm cost: " + str(roundf(Globals.farm_upgrade_cost))
+		farm_amount_label.text = "Owned: " + str(Globals.farm_amount)
 
 	
 func _on_ultimate_upgrade_pressed() -> void:
@@ -97,30 +99,41 @@ func _on_ultimate_upgrade_pressed() -> void:
 
 #----------------right side ----------------#
 func _on_sell_button_pressed() -> void:
-	if GameData.pics >= GameData.clickpower:
-		GameData.pics -= GameData.clickpower
-		GameData.money += GameData.clickpower
+	if Globals.pics >= Globals.clickpower:
+		Globals.pics -= Globals.clickpower
+		Globals.money += Globals.clickpower
 
 
 
 func _on_worker_upgrade_pressed() -> void:
-	if GameData.money >= GameData.worker_upgrade_cost:
-		GameData.money -= GameData.worker_upgrade_cost
-		GameData.worker_amount += 1
-		GameData.worker_upgrade_cost *= 1.2
+	if Globals.money >= Globals.worker_upgrade_cost:
+		Globals.money -= Globals.worker_upgrade_cost
+		Globals.worker_amount += 1
+		Globals.worker_upgrade_cost *= 1.2
 		
-		worker_upgrade.text = "Hire worker " + str(roundf(GameData.worker_upgrade_cost))
-		worker_amount.text = "Owned: " + str(GameData.worker_amount)
+		worker_upgrade.text = "Hire worker " + str(roundf(Globals.worker_upgrade_cost))
+		worker_amount.text = "Owned: " + str(Globals.worker_amount)
 	
 
 func _on_pawparazzi_upgrade_pressed() -> void:
-	if GameData.money >= GameData.pawparazzi_upgrade_cost:
-		print("Money before:", GameData.money)
-		GameData.money -= GameData.pawparazzi_upgrade_cost
-		print("Money after:", GameData.money)
+	if Globals.money >= Globals.pawparazzi_upgrade_cost:
+		print("Money before:", Globals.money)
+		Globals.money -= Globals.pawparazzi_upgrade_cost
+		print("Money after:", Globals.money)
 
-		GameData.pawparazzi_amount += 1
-		GameData.pawparazzi_upgrade_cost = ceil(GameData.pawparazzi_upgrade_cost * 1.2)
+		Globals.pawparazzi_amount += 1
+		Globals.pawparazzi_upgrade_cost = ceil(Globals.pawparazzi_upgrade_cost * 1.2)
 		
-		pawparazzi_upgrade.text = "Hire pawparazzi " + str(roundf(GameData.pawparazzi_upgrade_cost))
-		pawparazzi_amount.text = "Owned: " + str(GameData.pawparazzi_amount)
+		pawparazzi_upgrade.text = "Hire pawparazzi " + str(roundf(Globals.pawparazzi_upgrade_cost))
+		pawparazzi_amount.text = "Owned: " + str(Globals.pawparazzi_amount)
+
+
+func _on_buy_house_pressed() -> void:
+	if Globals.money >= 3000:
+		Globals.money -= 3000
+		status_label.text = "not homeless"
+		house.visible = true
+	elif Globals.money >= 10000:
+		Globals.money -= 10000
+		status_label.text = "homeowner"
+	

@@ -14,7 +14,7 @@ func _on_click_button_pressed() -> void:
 
 func spawn_catnip():
 	var p = preload("res://scenes/catnip_particles.tscn").instantiate()
-	p.amount = min(15,GameData.clickpower)
+	p.amount = min(15,Globals.clickpower)
 	p.global_position = get_global_mouse_position()
 	p.emitting = true
 	add_child(p)

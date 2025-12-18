@@ -12,13 +12,13 @@ var additionalscale = 0.0:
 		
 
 func _ready():
-	GameData.catnip_changed.connect(_on_catnip_changed)
+	Globals.catnip_changed.connect(_on_catnip_changed)
 	# Initialize scale
-	_on_catnip_changed(GameData.catnip)
+	_on_catnip_changed(Globals.catnip)
 
 func _process(delta):
 	# Optional: continuously smooth toward target scale
-	var target_scale = _calculate_scale(GameData.catnip)
+	var target_scale = _calculate_scale(Globals.catnip)
 	scale = scale.lerp(Vector2.ONE * target_scale, scale_smooth_factor)
 
 

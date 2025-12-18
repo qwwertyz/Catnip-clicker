@@ -16,6 +16,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if current_state:
 		current_state.Update(delta)
+		current_state.Physics_Update(delta)
 
 func on_Transitioned(state, new_state_name):
 	if state != current_state:
@@ -25,5 +26,5 @@ func on_Transitioned(state, new_state_name):
 	if current_state:
 		current_state.Exit()
 		
-	new_state.enter()
+	new_state.Enter()
 	current_state = new_state

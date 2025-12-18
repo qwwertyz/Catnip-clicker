@@ -1,6 +1,5 @@
-[gd_scene load_steps=59 format=3 uid="uid://c0x4rkhtlr0nf"]
+[gd_scene load_steps=60 format=3 uid="uid://c0x4rkhtlr0nf"]
 
-[ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://assets/Free pack/cat 1.6.png" id="1_lwgw5"]
 [ext_resource type="Texture2D" uid="uid://dnvj1fhs3npab" path="res://Free pack/cat 1.6.png" id="1_r7qoi"]
 [ext_resource type="Script" uid="uid://bqmmbuqmvep4e" path="res://script/kitty.gd" id="1_tqbcw"]
 [ext_resource type="AudioStream" uid="uid://c7lcy1gcp13t" path="res://assets/music/cat-meow-8-fx-306184.mp3" id="3_26jn4"]
@@ -8,9 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://ds8hqoav0nifw" path="res://assets/music/camera-shutter-95121.mp3" id="4_q6pbq"]
 [ext_resource type="Script" uid="uid://cdm0ed3kj5xwy" path="res://script/state_machine.gd" id="7_010mf"]
 [ext_resource type="Script" uid="uid://d2uejn0wklxue" path="res://script/kitty_idle.gd" id="8_010mf"]
+[ext_resource type="Script" uid="uid://cr7jwyrumg48g" path="res://script/kitty_walk.gd" id="8_kqa1l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d0jb"]
-atlas = ExtResource("1_lwgw5")
+atlas = ExtResource("1_r7qoi")
 region = Rect2(0, 1376, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egrb0"]
@@ -415,6 +415,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_010mf"]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="Kitty" type="AnimatedSprite2D" parent="."]
@@ -422,7 +424,7 @@ z_index = 1
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_vuvx8")
 animation = &"Drag"
-autoplay = "Walk_down"
+autoplay = "Drag"
 script = ExtResource("1_tqbcw")
 object_to_spawn = ExtResource("3_q6pbq")
 
@@ -450,11 +452,21 @@ volume_db = 2.053
 
 [node name="State" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_010mf")
-initial_state = NodePath("KittyIdle")
+initial_state = NodePath("KittyWalk")
 
-[node name="KittyIdle" type="Node" parent="State" node_paths=PackedStringArray("kitty")]
+[node name="KittyIdle" type="Node" parent="State" node_paths=PackedStringArray("kitty", "animated_sprite")]
 script = ExtResource("8_010mf")
 kitty = NodePath("../..")
+animated_sprite = NodePath("../../Kitty")
 metadata/_custom_type_script = "uid://d2uejn0wklxue"
+
+[node name="KittyWalk" type="Node" parent="State" node_paths=PackedStringArray("kitty", "animated_sprite")]
+script = ExtResource("8_kqa1l")
+kitty = NodePath("../..")
+animated_sprite = NodePath("../../Kitty")
+metadata/_custom_type_script = "uid://cr7jwyrumg48g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_010mf")
 
 [connection signal="pressed" from="Button" to="Kitty" method="_on_button_pressed"]

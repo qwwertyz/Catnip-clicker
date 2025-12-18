@@ -18,14 +18,19 @@ config/icon="res://icon.svg"
 [autoload]
 
 Main="*res://script/main.gd"
-GameData="*res://script/game_data.gd"
 BgMusic="*res://scenes/bg_music.tscn"
+Globals="*res://script/Globals.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://dbcolcdpnn8dl"
 mouse_cursor/custom_image_hotspot=Vector2(16, 16)
+
+[editor]
+
+movie_writer/movie_file="C:/Users/Lu000020/OneDrive - Universiteit Utrecht/7788/Zoe/GODOT-PROJECTS/catnip-clicker/export/movie.avi"
+movie_writer/fps=30
 
 [editor_plugins]
 

@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-signal Transitioned
+signal Transitioned(from_state, to_state)
 func Enter():
 	pass
 func Exit():

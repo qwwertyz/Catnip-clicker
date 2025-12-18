@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=23 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
+[ext_resource type="Shader" uid="uid://bsui07pyupbak" path="res://test.gdshader" id="2_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://ccwr6tt44qnso" path="res://image/grass.png" id="2_jbj1t"]
 [ext_resource type="Script" uid="uid://dil4rfpevhssw" path="res://script/kitty_spawner.gd" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://du6wrkkju6yd7" path="res://script/game_data.gd" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://du6wrkkju6yd7" path="res://script/Globals.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bne5lwcpkyelu" path="res://scenes/button.tscn" id="3_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://ccfv6biknjr1t" path="res://image/house.png" id="4_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://c0x4rkhtlr0nf" path="res://scenes/kitty.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://4w84udbjblxy" path="res://scenes/button_variation.tscn" id="5_choun"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
@@ -17,6 +19,13 @@
 [ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://image/shop door.png" id="14_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://b15hlxe3htptp" path="res://image/homeless.png" id="16_muem4"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqmmt"]
+shader = ExtResource("2_dp3eg")
+shader_parameter/wind_strength = 0.006
+shader_parameter/wind_speed = 1.0
+shader_parameter/wind_power = 2.0
+shader_parameter/affected_height = 0.628
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
 
 [sub_resource type="Theme" id="Theme_sugp2"]
@@ -28,12 +37,22 @@ size = Vector2(140, 117)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_o5qli")
 
-[node name="Grass" type="Sprite2D" parent="."]
-position = Vector2(561, 379)
+[node name="Grass2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gqmmt")
+offset_left = -66.0
+offset_top = -72.0
+offset_right = 664.0
+offset_bottom = 648.0
 scale = Vector2(1.67778, 1.30278)
 texture = ExtResource("2_jbj1t")
 
-[node name="GameData" type="Node2D" parent="."]
+[node name="House" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(391, 198)
+scale = Vector2(0.066345, 0.066345)
+texture = ExtResource("4_dp3eg")
+
+[node name="Globals" type="Node2D" parent="."]
 script = ExtResource("2_tbgi4")
 
 [node name="Control" type="Control" parent="."]
@@ -113,8 +132,6 @@ autowrap_mode = 0
 [node name="ClickButton" parent="Control" instance=ExtResource("3_o6xl0")]
 layout_mode = 0
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 423.0
@@ -127,6 +144,11 @@ tooltip_text = "Work"
 
 [node name="WorkerUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 856.0
 offset_top = 371.0
 offset_right = 1086.0
@@ -145,6 +167,11 @@ text = "Owned: 0"
 
 [node name="PawparazziUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 856.0
 offset_top = 270.0
 offset_right = 1086.0
@@ -164,8 +191,6 @@ text = "Owned: 0"
 [node name="CatnipFarmUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 70.0
@@ -190,8 +215,6 @@ text = "Owned: 0"
 [node name="UltimateUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 68.0
@@ -205,6 +228,11 @@ text = "ULTIMATE UPGRADE"
 
 [node name="SellButton" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 856.0
 offset_top = 162.0
 offset_right = 1083.0
@@ -216,8 +244,6 @@ text = "SELL PICS"
 [node name="ClickpowerUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
 anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 68.0
@@ -267,6 +293,9 @@ shape = SubResource("RectangleShape2D_jyhfs")
 scale = Vector2(0.296875, 0.257813)
 script = ExtResource("2_jyhfs")
 object_to_spawn = ExtResource("4_jyhfs")
+base_catnip = null
+cat_multiplier = null
+max_cats = null
 
 [node name="Label" type="Label" parent="KittySpawner"]
 visible = false
@@ -307,12 +336,12 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "Holy kitty shop
 get all you need here!"
 
-[node name="Button" type="Button" parent="ShopElements"]
+[node name="BuyHouse" type="Button" parent="ShopElements"]
 offset_left = 139.0
 offset_top = 148.0
 offset_right = 347.0
 offset_bottom = 223.0
-text = "Catnip farm"
+text = "A house"
 
 [node name="CloseShop" type="Button" parent="ShopElements"]
 offset_left = 19.0
@@ -321,15 +350,14 @@ offset_right = 1142.0
 offset_bottom = 587.0
 text = "⬆️⬆️⬆️close shop⬆️⬆️⬆️"
 
-[node name="Homeless" type="Sprite2D" parent="."]
+[node name="Homeless" type="Sprite2D" parent="ShopElements"]
 position = Vector2(126, 554)
 scale = Vector2(0.0748184, 0.0748184)
 texture = ExtResource("16_muem4")
 
 [node name="Kitty" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(201.5, 203)
-scale = Vector2(5.21875, 5.8125)
-autoplay = "Drag"
+scale = Vector2(0.399284, 0.387855)
 
 [connection signal="pressed" from="Control/ClickButton" to="." method="_on_click_button_pressed"]
 [connection signal="pressed" from="Control/ClickButton" to="ClickButtonSpawner" method="_on_click_button_pressed"]
@@ -342,6 +370,7 @@ autoplay = "Drag"
 [connection signal="pressed" from="Control/ClickpowerUpgrade" to="." method="_on_clickpower_upgrade_pressed"]
 [connection signal="pressed" from="Control/ClickpowerUpgrade" to="Camera2D" method="_on_clickpower_upgrade_pressed"]
 [connection signal="timeout" from="Control/Tick" to="." method="_on_tick_timeout"]
-[connection signal="timeout" from="Control/Tick" to="GameData" method="_on_tick_timeout"]
+[connection signal="timeout" from="Control/Tick" to="Globals" method="_on_tick_timeout"]
 [connection signal="pressed" from="Control/OpenShop" to="ShopElements" method="_on_open_shop_pressed"]
+[connection signal="pressed" from="ShopElements/BuyHouse" to="." method="_on_buy_house_pressed"]
 [connection signal="pressed" from="ShopElements/CloseShop" to="ShopElements" method="_on_close_shop_pressed"]

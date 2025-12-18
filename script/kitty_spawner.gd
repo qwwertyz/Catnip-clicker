@@ -15,12 +15,12 @@ func catnip_required_for_cat(n: int) -> float:
 	
 func max_cats_unlocked() -> int:
 	for n in range(1, max_cats + 1):
-		if GameData.lifetime_earnings < catnip_required_for_cat(n):
+		if Globals.lifetime_earnings < catnip_required_for_cat(n):
 			return n - 1
 	return max_cats
 
 func _ready() -> void:
-	GameData.lifetime_changed.connect(on_lifetime_changed)
+	Globals.lifetime_changed.connect(on_lifetime_changed)
 	
 func on_lifetime_changed(value):
 	
