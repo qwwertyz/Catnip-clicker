@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=24 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://bsui07pyupbak" path="res://test.gdshader" id="2_dp3eg"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dxc4iqsinej05" path="res://script/shop_elements.gd" id="13_a8y0u"]
 [ext_resource type="Texture2D" uid="uid://bmny1sgdvxbjp" path="res://image/shop door.png" id="14_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://b15hlxe3htptp" path="res://image/homeless.png" id="16_muem4"]
+[ext_resource type="Texture2D" uid="uid://d0gyq57h36glq" path="res://image/cat merchant.png" id="19_0ld40"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gqmmt"]
 shader = ExtResource("2_dp3eg")
@@ -109,10 +110,10 @@ autowrap_mode = 0
 
 [node name="DPSLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 79.0
-offset_right = 118.0
-offset_bottom = 124.0
+offset_left = 23.0
+offset_top = 67.0
+offset_right = 138.0
+offset_bottom = 112.0
 theme = SubResource("Theme_sugp2")
 text = "DPS: 0"
 scroll_active = false
@@ -143,6 +144,7 @@ grow_vertical = 1
 tooltip_text = "Work"
 
 [node name="WorkerUpgrade" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -166,6 +168,7 @@ theme_override_colors/font_color = Color(0.731026, 0.485682, 0.367899, 1)
 text = "Owned: 0"
 
 [node name="PawparazziUpgrade" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,6 +192,7 @@ theme_override_colors/font_color = Color(0.731026, 0.485682, 0.367899, 1)
 text = "Owned: 0"
 
 [node name="CatnipFarmUpgrade" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -213,6 +217,7 @@ theme_override_colors/font_color = Color(0.731026, 0.485682, 0.367899, 1)
 text = "Owned: 0"
 
 [node name="UltimateUpgrade" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -227,6 +232,7 @@ tooltip_text = "To be unlocked..."
 text = "ULTIMATE UPGRADE"
 
 [node name="SellButton" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -242,6 +248,7 @@ tooltip_text = "Sell your pics for money
 text = "SELL PICS"
 
 [node name="ClickpowerUpgrade" parent="Control" instance=ExtResource("5_choun")]
+clip_contents = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -314,7 +321,7 @@ popup = ExtResource("10_eb6dy")
 position = Vector2(549, 245)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(583, 317)
+position = Vector2(576, 324)
 script = ExtResource("11_ya4ey")
 
 [node name="ShopElements" type="Node2D" parent="."]
@@ -354,6 +361,11 @@ text = "⬆️⬆️⬆️close shop⬆️⬆️⬆️"
 position = Vector2(126, 554)
 scale = Vector2(0.0748184, 0.0748184)
 texture = ExtResource("16_muem4")
+
+[node name="CatMerchant" type="Sprite2D" parent="ShopElements"]
+position = Vector2(991, 424)
+scale = Vector2(0.096, 0.096)
+texture = ExtResource("19_0ld40")
 
 [node name="Kitty" parent="." instance=ExtResource("4_jyhfs")]
 position = Vector2(201.5, 203)

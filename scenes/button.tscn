@@ -16,11 +16,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
 shader = ExtResource("3_8m7bo")
-shader_parameter/fov = 1.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.11
+shader_parameter/mouse_pos = Vector2(0, 0)
+shader_parameter/strength = 0.12
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
 atlas = ExtResource("4_t81cg")
@@ -28,6 +25,7 @@ region = Rect2(11, 70, 26, 19)
 
 [node name="ClickButton" type="Button"]
 use_parent_material = true
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -47,6 +45,7 @@ script = ExtResource("2_1bdt2")
 show_behind_parent = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_choun")
+layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
