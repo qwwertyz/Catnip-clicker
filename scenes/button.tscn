@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://byk1jpxvp4xvk" path="res://assets/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_i7y4x"]
 [ext_resource type="Script" uid="uid://bl23sydmmhy0g" path="res://script/click_button.gd" id="2_1bdt2"]
-[ext_resource type="Shader" uid="uid://d0br5ityxqbme" path="res://shaders/fake_3D.gdshader" id="3_8m7bo"]
+[ext_resource type="Shader" uid="uid://cyqk2d4jje6ea" path="res://shaders/fake_3d_TEST.gdshader" id="3_1bdt2"]
 [ext_resource type="Texture2D" uid="uid://bbwwaiuuj3esf" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/buttons/Square Buttons 26x19.png" id="4_t81cg"]
 [ext_resource type="AudioStream" uid="uid://xf1jrcgul0th" path="res://assets/music/Main_sfx.mp3" id="5_1bdt2"]
 
@@ -14,10 +14,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_choun"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
-shader = ExtResource("3_8m7bo")
-shader_parameter/mouse_pos = Vector2(0, 0)
-shader_parameter/strength = 0.12
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8m7bo"]
+shader = ExtResource("3_1bdt2")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
 atlas = ExtResource("4_t81cg")
@@ -44,7 +47,7 @@ script = ExtResource("2_1bdt2")
 [node name="ButtonTexture" type="TextureRect" parent="."]
 show_behind_parent = true
 texture_filter = 1
-material = SubResource("ShaderMaterial_choun")
+material = SubResource("ShaderMaterial_8m7bo")
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 15

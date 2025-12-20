@@ -20,14 +20,12 @@ var last_pos: Vector2
 var velocity: Vector2
 
 @onready var button_texture: TextureRect = $ButtonTexture
-@onready var shadow = $Shadow
 
 func _ready() -> void:
-	button_texture.material = button_texture.material.duplicate()
 	# Convert to radians because lerp_angle is using that
 	angle_x_max = deg_to_rad(angle_x_max)
 	angle_y_max = deg_to_rad(angle_y_max)
-	button_texture.material = button_texture.material.duplicate()
+	#button_texture.material = button_texture.material.duplicate()
 	
 	pivot_offset = size / 2
 
