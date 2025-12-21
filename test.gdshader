@@ -14,7 +14,7 @@ void fragment() {
     float flipped_y = 1.0 - uv.y;
 
     // 2️⃣ Only affect bottom portion (now top visually because of flip)
-    float wind_mask = step(flipped_y, affected_height); 
+    float wind_mask = step(flipped_y, affected_height);
 
     // 3️⃣ Remap flipped bottom portion to 0..1
     float local_height = clamp(flipped_y / affected_height, 0.0, 1.0);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ixr7pgo6m2cb"]
+[gd_scene load_steps=28 format=3 uid="uid://ixr7pgo6m2cb"]
 
 [ext_resource type="Script" uid="uid://bafoo5cr1v5x1" path="res://script/main.gd" id="1_o5qli"]
 [ext_resource type="Shader" uid="uid://bsui07pyupbak" path="res://test.gdshader" id="2_dp3eg"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://4w84udbjblxy" path="res://scenes/button_variation.tscn" id="5_choun"]
 [ext_resource type="Script" uid="uid://kx64p1ag8oyr" path="res://script/catnip_stack.gd" id="5_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cs3f6v1rqr78a" path="res://image/image (2).png" id="6_tefeu"]
+[ext_resource type="Shader" uid="uid://cp1t1siunll28" path="res://shaders/sparkle.gdshader" id="8_yc10j"]
 [ext_resource type="Script" uid="uid://jymkcsx5bqvi" path="res://script/popup_text_spawner.gd" id="9_choun"]
+[ext_resource type="Texture2D" uid="uid://p3th4iryxt8h" path="res://image/—Pngtree—leaf pixel_21052406.png" id="9_jscy8"]
 [ext_resource type="PackedScene" uid="uid://c4ic6dv4md541" path="res://scenes/popup_text.tscn" id="10_eb6dy"]
+[ext_resource type="Script" uid="uid://bmm4do21vs4bp" path="res://scenes/shiny.gd" id="10_jscy8"]
 [ext_resource type="PackedScene" uid="uid://coclp8qf2bo8j" path="res://scenes/catnip_particles.tscn" id="10_ya4ey"]
 [ext_resource type="Script" uid="uid://bvk2tjmnddnkb" path="res://script/camera_2d.gd" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://dxc4iqsinej05" path="res://script/shop_elements.gd" id="13_a8y0u"]
@@ -31,6 +34,13 @@ shader_parameter/affected_height = 0.628
 
 [sub_resource type="Theme" id="Theme_sugp2"]
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_0wfyh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pm3ni"]
+shader = ExtResource("8_yc10j")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_progress = 0.0
+shader_parameter/shine_size = 0.1
+shader_parameter/shine_angle = 45.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyhfs"]
 size = Vector2(140, 117)
@@ -110,10 +120,10 @@ autowrap_mode = 0
 
 [node name="DPSLabel" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 23.0
-offset_top = 67.0
-offset_right = 138.0
-offset_bottom = 112.0
+offset_left = 55.0
+offset_top = 63.0
+offset_right = 170.0
+offset_bottom = 108.0
 theme = SubResource("Theme_sugp2")
 text = "DPS: 0"
 scroll_active = false
@@ -154,6 +164,8 @@ offset_left = 856.0
 offset_top = 371.0
 offset_right = 1086.0
 offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
 tooltip_text = "Who wants to click when you can hire people to do that for you? Sells 1 pic / sec"
 text = "HIRE WORKER: 100"
 
@@ -177,6 +189,8 @@ offset_left = 856.0
 offset_top = 270.0
 offset_right = 1086.0
 offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 2
 tooltip_text = "Only takes glamorous pictures! takes 1 pic / sec"
 text = "HIRE pawparazzi: 70"
 
@@ -191,15 +205,10 @@ text = "Owned: 0"
 
 [node name="CatnipFarmUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 70.0
 offset_top = 238.0
 offset_right = 300.0
 offset_bottom = 323.0
-grow_horizontal = 1
-grow_vertical = 1
 tooltip_text = "Welcome to the age of agriculture!
 produces 2 catnip/s"
 text = "build catnip farm: 150"
@@ -215,15 +224,10 @@ text = "Owned: 0"
 
 [node name="UltimateUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 68.0
 offset_top = 337.0
 offset_right = 298.0
 offset_bottom = 426.0
-grow_horizontal = 1
-grow_vertical = 1
 tooltip_text = "To be unlocked..."
 text = "ULTIMATE UPGRADE"
 
@@ -238,21 +242,18 @@ offset_left = 856.0
 offset_top = 162.0
 offset_right = 1083.0
 offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
 tooltip_text = "Sell your pics for money
 1 pic = 1 buck"
 text = "SELL PICS"
 
 [node name="ClickpowerUpgrade" parent="Control" instance=ExtResource("5_choun")]
 layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 68.0
 offset_top = 139.0
 offset_right = 298.0
 offset_bottom = 224.0
-grow_horizontal = 1
-grow_vertical = 1
 tooltip_text = "Train your arm so you can gather more catnip at a time!"
 text = "upgrade clickpower: 50"
 
@@ -275,6 +276,13 @@ offset_top = 1.0
 offset_right = 1140.0
 offset_bottom = 52.0
 text = "⬇️⬇️⬇️open shop⬇️⬇️⬇️"
+
+[node name="—pngtree—leafPixel21052406" type="Sprite2D" parent="Control"]
+material = SubResource("ShaderMaterial_pm3ni")
+position = Vector2(481, 183)
+scale = Vector2(0.00746667, 0.00746667)
+texture = ExtResource("9_jscy8")
+script = ExtResource("10_jscy8")
 
 [node name="CatnipStack" type="Area2D" parent="."]
 position = Vector2(1038, 559)
